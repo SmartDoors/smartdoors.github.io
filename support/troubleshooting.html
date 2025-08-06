@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDoors 문제 해결 가이드 - 자주 발생하는 문제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .problem-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .problem-section h2 {
+            color: #007AFF;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007AFF;
+            padding-bottom: 10px;
+        }
+        
+        .problem-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007AFF;
+        }
+        
+        .problem-item h3 {
+            color: #007AFF;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .problem-item h4 {
+            color: #333;
+            margin: 15px 0 8px 0;
+            font-size: 1rem;
+        }
+        
+        .solution-list {
+            list-style: none;
+            counter-reset: solution-counter;
+        }
+        
+        .solution-list li {
+            counter-increment: solution-counter;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .solution-list li::before {
+            content: counter(solution-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #28a745;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .problem-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">← 지원 홈으로</a>
+            <h1>문제 해결 가이드</h1>
+            <p>SmartDoors 앱 사용 중 발생하는 문제들을 해결하는 방법</p>
+        </div>
+        
+        <div class="problem-section">
+            <h2>🔗 연결 문제</h2>
+            
+            <div class="problem-item">
+                <h3>슬라이딩 도어가 검색되지 않습니다</h3>
+                <h4>가능한 원인:</h4>
+                <ul>
+                    <li>블루투스가 비활성화되어 있음</li>
+                    <li>슬라이딩 도어가 다른 기기에 연결되어 있음</li>
+                    <li>슬라이딩 도어와의 거리가 너무 멀음</li>
+                    <li>슬라이딩 도어 전원이 꺼져 있음</li>
+                </ul>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>설정 → 블루투스에서 블루투스가 켜져 있는지 확인</li>
+                    <li>슬라이딩 도어가 다른 기기에 연결되어 있는지 확인하고 연결 해제</li>
+                    <li>슬라이딩 도어와 5m 이내에서 다시 시도</li>
+                    <li>슬라이딩 도어 전원 상태 확인</li>
+                    <li>앱을 완전히 종료하고 다시 실행</li>
+                </ol>
+            </div>
+            
+            <div class="problem-item">
+                <h3>슬라이딩 도어 연결이 자주 끊어집니다</h3>
+                <h4>가능한 원인:</h4>
+                <ul>
+                    <li>슬라이딩 도어와의 거리가 멀어짐</li>
+                    <li>다른 블루투스 기기와의 간섭</li>
+                    <li>슬라이딩 도어 전원 문제</li>
+                    <li>iOS 블루투스 설정 문제</li>
+                </ul>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>슬라이딩 도어 근처에서 사용</li>
+                    <li>다른 블루투스 기기 연결 해제</li>
+                    <li>슬라이딩 도어 전원 상태 확인</li>
+                    <li>설정 → 블루투스 → 슬라이딩 도어 → "이 기기 잊기" 후 재연결</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="problem-section">
+            <h2>🚪 제어 문제</h2>
+            
+            <div class="problem-item">
+                <h3>슬라이딩 도어가 열리지 않습니다</h3>
+                <h4>가능한 원인:</h4>
+                <ul>
+                    <li>슬라이딩 도어가 이미 열려있음</li>
+                    <li>슬라이딩 도어 전원 문제</li>
+                    <li>슬라이딩 도어 기계적 문제</li>
+                    <li>권한 문제</li>
+                </ul>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>슬라이딩 도어 현재 상태 확인</li>
+                    <li>슬라이딩 도어 전원 상태 확인</li>
+                    <li>수동으로 슬라이딩 도어 작동 확인</li>
+                    <li>설정 → 사용자 관리에서 권한 확인</li>
+                    <li>슬라이딩 도어 재부팅 (전원 재연결)</li>
+                </ol>
+            </div>
+            
+            <div class="problem-item">
+                <h3>앱에서 슬라이딩 도어 상태가 업데이트되지 않습니다</h3>
+                <h4>가능한 원인:</h4>
+                <ul>
+                    <li>블루투스 연결 문제</li>
+                    <li>앱 캐시 문제</li>
+                    <li>슬라이딩 도어 펌웨어 문제</li>
+                </ul>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>앱 새로고침 (당겨서 새로고침)</li>
+                    <li>앱 완전 종료 후 재실행</li>
+                    <li>슬라이딩 도어 재연결</li>
+                    <li>설정 → 앱 정보 → 캐시 삭제</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="problem-section">
+            <h2>📱 앱 문제</h2>
+            
+            <div class="problem-item">
+                <h3>앱이 실행되지 않습니다</h3>
+                <h4>가능한 원인:</h4>
+                <ul>
+                    <li>iOS 버전 호환성 문제</li>
+                    <li>앱 손상</li>
+                    <li>저장공간 부족</li>
+                </ul>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>iOS 13.0 이상인지 확인</li>
+                    <li>앱 삭제 후 재설치</li>
+                    <li>기기 저장공간 확인</li>
+                    <li>기기 재부팅</li>
+                </ol>
+            </div>
+            
+            <div class="problem-item">
+                <h3>앱이 느리게 작동합니다</h3>
+                <h4>가능한 원인:</h4>
+                <ul>
+                    <li>기기 성능 문제</li>
+                    <li>앱 캐시 과다</li>
+                    <li>백그라운드 앱 과다</li>
+                </ul>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>백그라운드 앱 정리</li>
+                    <li>설정 → 앱 정보 → 캐시 삭제</li>
+                    <li>기기 재부팅</li>
+                    <li>앱 재설치</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="problem-section">
+            <h2>🔐 권한 문제</h2>
+            
+            <div class="problem-item">
+                <h3>블루투스 권한이 거부되었습니다</h3>
+                <div class="error-box">
+                    <strong>오류 메시지:</strong> "블루투스 권한이 필요합니다"
+                </div>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>설정 → SmartDoors → 블루투스 허용</li>
+                    <li>앱 재실행</li>
+                    <li>권한 요청 시 "허용" 선택</li>
+                </ol>
+            </div>
+            
+            <div class="problem-item">
+                <h3>위치 권한이 거부되었습니다</h3>
+                <div class="warning-box">
+                    <strong>참고:</strong> 블루투스 스캔을 위해 위치 권한이 필요합니다.
+                </div>
+                
+                <h4>해결 방법:</h4>
+                <ol class="solution-list">
+                    <li>설정 → SmartDoors → 위치 허용</li>
+                    <li>"앱 사용 중에만" 또는 "항상" 선택</li>
+                    <li>앱 재실행</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="problem-section">
+            <h2>🔧 고급 문제 해결</h2>
+            
+            <div class="problem-item">
+                <h3>슬라이딩 도어 진단 방법</h3>
+                <h4>진단 모드 실행:</h4>
+                <ol class="solution-list">
+                    <li>앱에서 슬라이딩 도어 선택</li>
+                    <li>설정 → 진단 실행</li>
+                    <li>진단 결과 확인</li>
+                    <li>문제 발견 시 제조사에 문의</li>
+                </ol>
+            </div>
+            
+            <div class="problem-item">
+                <h3>앱 로그 확인</h3>
+                <h4>로그 확인 방법:</h4>
+                <ol class="solution-list">
+                    <li>설정 → 개발자 옵션 → 로그 활성화</li>
+                    <li>문제 상황 재현</li>
+                    <li>설정 → 로그 내보내기</li>
+                    <li>로그 파일을 지원팀에 전송</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="problem-section">
+            <h2>📞 추가 지원</h2>
+            
+            <div class="success-box">
+                <strong>위의 방법으로도 문제가 해결되지 않으면:</strong>
+                <ul style="margin-top: 10px;">
+                    <li>이메일: support@yunhunplus.co.kr</li>
+                    <li>앱 내 문의: 설정 → 도움말 → 문의하기</li>
+                    <li>웹사이트: https://smartdoors.github.io/support</li>
+                </ul>
+            </div>
+            
+            <div class="warning-box">
+                <strong>문의 시 포함할 정보:</strong>
+                <ul style="margin-top: 10px;">
+                    <li>iOS 버전</li>
+                    <li>앱 버전</li>
+                    <li>슬라이딩 도어 모델명</li>
+                    <li>문제 발생 상황</li>
+                    <li>시도한 해결 방법</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>추가 도움이 필요하시면 <a href="contact.html">문의하기</a>를 이용해주세요.</p>
+            <p><a href="index.html">← 지원 홈으로 돌아가기</a></p>
+        </div>
+    </div>
+</body>
+</html> 

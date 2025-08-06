@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartDoors 문의하기 - 고객 지원</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .contact-section h2 {
+            color: #007AFF;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007AFF;
+            padding-bottom: 10px;
+        }
+        
+        .contact-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .contact-method {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .contact-method h3 {
+            color: #007AFF;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-method p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007AFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+        
+        .contact-btn:hover {
+            background: #0056CC;
+        }
+        
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-group select {
+            background: white;
+        }
+        
+        .submit-btn {
+            background: #007AFF;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background: #0056CC;
+        }
+        
+        .info-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .info-item h4 {
+            color: #007AFF;
+            margin-bottom: 5px;
+        }
+        
+        .info-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .faq-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+        
+        .faq-item h4 {
+            color: #007AFF;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+        
+        .faq-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .contact-section,
+            .form-section,
+            .info-section,
+            .faq-section {
+                padding: 20px;
+            }
+            
+            .contact-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">← 지원 홈으로</a>
+            <h1>문의하기</h1>
+            <p>SmartDoors 앱에 대한 문의사항이나 피드백을 보내주세요</p>
+        </div>
+        
+        <div class="contact-section">
+            <h2>📞 연락 방법</h2>
+            
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <h3>📧 이메일</h3>
+                    <p>가장 빠른 응답을 받을 수 있는 방법입니다.</p>
+                    <a href="mailto:support@smartdoors.app" class="contact-btn">이메일 보내기</a>
+                </div>
+                
+                <div class="contact-method">
+                    <h3>🌐 웹사이트</h3>
+                    <p>공식 웹사이트에서 더 많은 정보를 확인하세요.</p>
+                    <a href="https://smartdoors.app" class="contact-btn" target="_blank">웹사이트 방문</a>
+                </div>
+                
+                <div class="contact-method">
+                    <h3>📱 앱 내 문의</h3>
+                    <p>앱 내에서 직접 문의할 수 있습니다.</p>
+                    <a href="#" class="contact-btn">앱 열기</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h2>📝 문의 양식</h2>
+            
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">이름 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">이메일 *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">문의 유형 *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">선택해주세요</option>
+                        <option value="technical">기술적 문제</option>
+                        <option value="connection">연결 문제</option>
+                        <option value="feature">기능 요청</option>
+                        <option value="bug">버그 신고</option>
+                        <option value="general">일반 문의</option>
+                        <option value="feedback">피드백</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="device">기기 정보</label>
+                    <select id="device" name="device">
+                        <option value="">선택해주세요</option>
+                        <option value="iphone">iPhone</option>
+                        <option value="ipad">iPad</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ios_version">iOS 버전</label>
+                    <input type="text" id="ios_version" name="ios_version" placeholder="예: iOS 16.0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="app_version">앱 버전</label>
+                    <input type="text" id="app_version" name="app_version" placeholder="예: 1.0.0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">문의 내용 *</label>
+                    <textarea id="message" name="message" placeholder="문의사항을 자세히 작성해주세요..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">문의 보내기</button>
+            </form>
+        </div>
+        
+        <div class="info-section">
+            <h2>ℹ️ 문의 시 포함할 정보</h2>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>📱 기기 정보</h4>
+                    <p>iPhone/iPad 모델명<br>iOS 버전</p>
+                </div>
+                
+                <div class="info-item">
+                    <h4>🔧 앱 정보</h4>
+                    <p>앱 버전<br>설치 날짜</p>
+                </div>
+                
+                <div class="info-item">
+                    <h4>🚪 도어락 정보</h4>
+                    <p>도어락 모델명<br>연결 상태</p>
+                </div>
+                
+                <div class="info-item">
+                    <h4>📋 문제 상황</h4>
+                    <p>발생 시점<br>재현 방법</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="faq-section">
+            <h2>❓ 자주 묻는 질문</h2>
+            
+            <div class="faq-item">
+                <h4>Q: 문의 후 응답을 언제 받을 수 있나요?</h4>
+                <p>A: 일반적으로 24-48시간 내에 응답드립니다. 긴급한 문제의 경우 더 빠른 응답이 가능합니다.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Q: 기술적 문제를 문의할 때 어떤 정보가 필요한가요?</h4>
+                <p>A: 기기 정보, 앱 버전, iOS 버전, 문제 발생 상황, 시도한 해결 방법 등을 포함해주시면 더 정확한 도움을 드릴 수 있습니다.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Q: 기능 요청이나 피드백도 받나요?</h4>
+                <p>A: 네, 사용자들의 의견은 앱 개선에 매우 중요합니다. 모든 피드백을 검토하여 반영하도록 노력하고 있습니다.</p>
+            </div>
+            
+            <div class="faq-item">
+                <h4>Q: 개인정보는 어떻게 보호되나요?</h4>
+                <p>A: 문의 시 제공해주신 정보는 문제 해결 목적으로만 사용되며, <a href="../smartdoors-privacy/privacy_policy.html">개인정보처리방침</a>에 따라 보호됩니다.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>빠른 도움이 필요하시면 <a href="troubleshooting.html">문제 해결 가이드</a>를 먼저 확인해보세요.</p>
+            <p><a href="index.html">← 지원 홈으로 돌아가기</a></p>
+        </div>
+    </div>
+</body>
+</html> 
