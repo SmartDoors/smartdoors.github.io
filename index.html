@@ -1107,40 +1107,80 @@
             }
 
             .hero {
-                padding-top: 44px;
+                position: relative;
+                min-height: 620px;
+                padding: 52px 0 46px;
+                display: flex;
+                align-items: flex-end;
+                background-image: linear-gradient(180deg, rgba(32, 35, 36, 0.18) 0%, rgba(32, 35, 36, 0.64) 62%, rgba(32, 35, 36, 0.82) 100%), url("images/hero/yegadoor-sliding-door.jpg");
+                background-size: cover;
+                background-position: center center;
+                border-bottom: 0;
+            }
+
+            .hero-grid {
+                display: block;
             }
 
             .hero-copy {
                 max-width: none;
+                padding-top: 18px;
+                border-top-color: rgba(255, 255, 255, 0.44);
             }
 
             .product-code {
-                font-size: 1.36rem;
-                margin-bottom: 14px;
+                color: rgba(255, 255, 255, 0.82);
+                font-size: 1.22rem;
+                margin-bottom: 12px;
             }
 
             .hero h1 {
-                font-size: clamp(2.05rem, 11vw, 3rem);
-                line-height: 1.12;
-                margin-bottom: 22px;
+                max-width: 10.5em;
+                color: white;
+                font-size: clamp(2.05rem, 10vw, 2.72rem);
+                line-height: 1.14;
+                margin-bottom: 20px;
+            }
+
+            .hero h1 br {
+                display: none;
             }
 
             .hero-lead {
+                color: rgba(255, 255, 255, 0.9);
+                border-left-color: rgba(255, 255, 255, 0.36);
                 font-size: 0.95rem;
                 line-height: 1.62;
-                margin-bottom: 22px;
+                margin-bottom: 18px;
+            }
+
+            .hero-lead br {
+                display: none;
+            }
+
+            .hero-copy p {
+                max-width: 34em;
+                color: rgba(255, 255, 255, 0.78);
+                font-size: 0.9rem;
+                line-height: 1.64;
             }
 
             .partner-note {
                 gap: 8px;
                 padding: 8px 11px;
+                color: rgba(255, 255, 255, 0.76);
+                border-color: rgba(255, 255, 255, 0.26);
+                background: rgba(255, 255, 255, 0.1);
                 font-size: 0.64rem;
                 letter-spacing: 0.02em;
             }
 
+            .partner-note strong {
+                color: white;
+            }
+
             .hero-image {
-                height: 340px;
-                border-radius: 20px;
+                display: none;
             }
 
             .section-header {
@@ -1388,6 +1428,17 @@
             .container {
                 padding-left: 16px;
                 padding-right: 16px;
+            }
+
+            .hero h1 {
+                max-width: 9.6em;
+                font-size: clamp(1.9rem, 10.5vw, 2.38rem);
+            }
+
+            .hero {
+                min-height: 560px;
+                padding-top: 42px;
+                padding-bottom: 38px;
             }
 
             .metric-card {
