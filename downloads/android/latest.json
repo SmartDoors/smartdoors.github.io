@@ -1,12 +1,12 @@
 {
   "platform": "android",
   "versionName": "1.2.0",
-  "versionCode": 3,
-  "fileName": "SmartDoors-v1.2.0-build3.apk",
+  "versionCode": 4,
+  "fileName": "SmartDoors-v1.2.0-build4.apk",
   "stableUrl": "downloads/android/smartdoors.apk",
-  "versionedUrl": "downloads/android/SmartDoors-v1.2.0-build3.apk",
-  "updatedAt": "2026-05-18T02:50:42.632Z",
-  "size": 73032107,
-  "sizeLabel": "69.6 MB",
-  "sha256": "044d5061d262870bebfebcb170869fd40c5650cc79bce0c3ce47bcaa8a6e2914"
+  "versionedUrl": "downloads/android/SmartDoors-v1.2.0-build4.apk",
+  "updatedAt": "2026-05-18T07:08:27.601Z",
+  "size": 73034203,
+  "sizeLabel": "69.7 MB",
+  "sha256": "23aec97ff8f0d70b845e903bb7328d5c6cc879b63d1094878e23d613e1ad6a03"
 }
