@@ -3,385 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartDoors 연결 가이드 - 슬라이딩 도어 연결 방법</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #007AFF, #5856D6);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        .back-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 20px;
-        }
-        
-        .guide-section {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-        
-        .guide-section h2 {
-            color: #007AFF;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #007AFF;
-            padding-bottom: 10px;
-        }
-        
-        .step-container {
-            counter-reset: step-counter;
-        }
-        
-        .step-item {
-            counter-increment: step-counter;
-            margin-bottom: 25px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #007AFF;
-            position: relative;
-        }
-        
-        .step-item::before {
-            content: counter(step-counter);
-            position: absolute;
-            left: -15px;
-            top: 20px;
-            background: #007AFF;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        .step-item h3 {
-            color: #007AFF;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .step-item p {
-            margin-bottom: 10px;
-        }
-        
-        .step-item ul {
-            margin-left: 20px;
-        }
-        
-        .step-item li {
-            margin-bottom: 5px;
-        }
-        
-        .tip-box {
-            background: #e3f2fd;
-            border-left: 4px solid #007AFF;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 6px 6px 0;
-        }
-        
-        .warning-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 6px 6px 0;
-        }
-        
-        .success-box {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 6px 6px 0;
-        }
-        
-        .image-placeholder {
-            background: #e9ecef;
-            border: 2px dashed #adb5bd;
-            padding: 40px;
-            text-align: center;
-            border-radius: 8px;
-            margin: 15px 0;
-            color: #6c757d;
-        }
-        
-        .compatibility-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-        
-        .compatibility-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #e9ecef;
-            text-align: center;
-        }
-        
-        .compatibility-item h4 {
-            color: #007AFF;
-            margin-bottom: 5px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            margin-top: 30px;
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .guide-section {
-                padding: 20px;
-            }
-            
-            .step-item {
-                padding: 15px;
-            }
-        }
-    </style>
+    <title>SmartDoors 연결 가이드 - BLE 및 WiFi 설정</title>
+    <link rel="stylesheet" href="support.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <a href="index.html" class="back-btn">← 지원 홈으로</a>
+    <header class="site-header">
+        <nav class="nav">
+            <a class="logo" href="../">SmartDoors</a>
+            <div class="nav-links">
+                <a href="index.html">지원 홈</a>
+                <a href="user-guide.html">사용 가이드</a>
+                <a href="troubleshooting.html">문제 해결</a>
+                <a href="contact.html">문의</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="eyebrow">Connection</div>
             <h1>연결 가이드</h1>
-            <p>SmartDoors 앱과 슬라이딩 도어를 연결하는 방법</p>
-        </div>
-        
-        <div class="guide-section">
-            <h2>📋 사전 준비사항</h2>
-            
-            <div class="step-container">
-                <div class="step-item">
-                    <h3>1. 호환성 확인</h3>
-                    <p>SmartDoors 앱은 다음 요구사항을 충족해야 합니다:</p>
-                    <div class="compatibility-list">
-                        <div class="compatibility-item">
-                            <h4>📱 기기</h4>
-                            <p>iPhone/iPad/Android<br>iOS 13.0 이상<br>Android 10.0 이상</p>
-                        </div>
-                        <div class="compatibility-item">
-                            <h4>🔗 블루투스</h4>
-                            <p>Bluetooth LE<br>5.0 이상</p>
-                        </div>
-                        <div class="compatibility-item">
-                            <h4>📍 위치</h4>
-                            <p>위치 권한<br>필요</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <h3>2. 슬라이딩 도어 준비</h3>
-                    <p>연결할 슬라이딩 도어가 다음 조건을 만족하는지 확인하세요:</p>
-                    <ul>
-                        <li>슬라이딩 도어가 전원 연결이 되어 있음</li>
-                        <li>블루투스 LE 기능 지원</li>
-                        <li>다른 기기에 연결되어 있지 않음 (연결 대기 상태)</li>
-                        <li>앱에서 5m 이내에 위치</li>
-                    </ul>
-                    
-                    <div class="warning-box">
-                        <strong>⚠️ 주의:</strong> 슬라이딩 도어가 다른 기기에 연결되어 있으면 SmartDoors 앱에서 검색되지 않습니다. 기존 연결을 해제한 후 다시 시도하세요.
-                    </div>
-                </div>
+            <p class="lead">YG-ADB100은 BLE 연결로 기본 제어와 설정을 수행하고, WiFi 또는 AP 네트워크를 통해 도어 웹서버와 OTA 페이지에 접근합니다.</p>
+        </section>
+
+        <section class="section">
+            <h2>사전 확인</h2>
+            <div class="grid">
+                <div class="card"><h3>휴대전화</h3><p>iOS 13 이상 또는 Android 10 이상, 블루투스 활성화, 앱 권한 허용이 필요합니다.</p></div>
+                <div class="card"><h3>도어 상태</h3><p>전원이 연결되어 있고 다른 휴대전화와 BLE 연결 중이 아니어야 합니다.</p></div>
+                <div class="card"><h3>거리</h3><p>처음 등록할 때는 도어와 가까운 거리에서 진행하세요. 벽이나 금속 구조물은 신호를 약하게 만들 수 있습니다.</p></div>
             </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>🔗 연결 과정</h2>
-            
-            <div class="step-container">
-                <div class="step-item">
-                    <h3>3. 앱 실행 및 권한 설정</h3>
-                    <p>SmartDoors 앱을 실행하고 필요한 권한을 허용합니다:</p>
-                    <ul>
-                        <li>SmartDoors 앱 실행</li>
-                        <li>블루투스 권한 요청 시 "허용" 선택</li>
-                        <li>위치 권한 요청 시 "앱 사용 중에만" 또는 "항상" 선택</li>
-                    </ul>
-                    
-                    <div class="tip-box">
-                        <strong>💡 팁:</strong> 처음 실행 시 모든 권한을 허용하면 더 원활한 연결이 가능합니다.
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <h3>4. 슬라이딩 도어 연결 상태 확인</h3>
-                    <p>슬라이딩 도어가 다른 기기에 연결되어 있지 않은지 확인합니다:</p>
-                    <ul>
-                        <li>기존에 연결된 다른 앱이나 기기가 있는지 확인</li>
-                        <li>다른 기기에 연결되어 있다면 해당 연결을 해제</li>
-                        <li>슬라이딩 도어의 전원이 켜져 있는지 확인</li>
-                        <li>슬라이딩 도어가 정상 작동 상태인지 확인</li>
-                    </ul>
-                    
-                    <div class="tip-box">
-                        <strong>💡 팁:</strong> 슬라이딩 도어는 별도의 페어링 모드가 없습니다. 다른 기기에 연결되어 있지 않으면 자동으로 연결 대기 상태가 되어 검색됩니다.
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <h3>5. 앱에서 슬라이딩 도어 검색</h3>
-                    <p>앱에서 슬라이딩 도어를 검색합니다:</p>
-                    <ul>
-                        <li>홈 화면에서 "+" 버튼 탭</li>
-                        <li>"기기 추가" 메뉴 선택</li>
-                        <li>앱이 주변 블루투스 기기를 스캔하기 시작</li>
-                        <li>검색된 슬라이딩 도어 목록에서 연결할 도어 선택</li>
-                    </ul>
-                    
-                    <div class="tip-box">
-                        <strong>💡 팁:</strong> 슬라이딩 도어가 검색되지 않으면 도어와의 거리를 확인하고 다른 기기에 연결되어 있지 않은지 확인하세요.
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <h3>6. 슬라이딩 도어 연결 및 설정</h3>
-                    <p>슬라이딩 도어를 선택한 후 연결을 완료합니다:</p>
-                    <ul>
-                        <li>검색된 슬라이딩 도어 목록에서 연결할 도어 선택</li>
-                        <li>연결 진행 상황 확인</li>
-                        <li>연결 완료 후 슬라이딩 도어 이름 설정</li>
-                        <li>슬라이딩 도어 위치 정보 입력 (선택사항)</li>
-                        <li>연결 완료 확인</li>
-                    </ul>
-                    
-                    <div class="success-box">
-                        <strong>✅ 성공:</strong> 연결이 완료되면 홈 화면에 슬라이딩 도어 카드가 표시됩니다.
-                    </div>
-                </div>
+        </section>
+
+        <section class="section">
+            <h2>BLE 등록 절차</h2>
+            <ol class="steps">
+                <li>앱 홈에서 기기 추가를 선택합니다.</li>
+                <li>주변 BLE 기기 검색이 시작되면 YG-ADB100 또는 현장 도어 이름을 선택합니다.</li>
+                <li>기기 등록 버튼을 눌러 BLE 연결과 패스워드 인증을 진행합니다.</li>
+                <li>인증에 성공하면 도어가 앱에 저장되고 홈 화면에 카드로 표시됩니다.</li>
+                <li>연결 후 앱은 기기 정보, WiFi 상태, 진단, 에너지 데이터를 순차적으로 요청합니다.</li>
+            </ol>
+            <div class="note">검색되지 않으면 도어 전원, 다른 휴대전화 연결 여부, OS 권한, BLE 활성화 상태를 먼저 확인하세요.</div>
+        </section>
+
+        <section class="section">
+            <h2>WiFi / AP 연결</h2>
+            <div class="data-list">
+                <div><strong>공유기 WiFi</strong><span>도어가 현장 공유기에 연결되면 앱은 해당 IP로 도어 웹서버에 접근합니다.</span></div>
+                <div><strong>AP 모드</strong><span>공유기 연결이 없을 때 도어 자체 AP IP를 사용해 설정 페이지에 접근할 수 있습니다.</span></div>
+                <div><strong>OTA 접근</strong><span>설정의 펌웨어/OTA 메뉴는 도어 웹서버의 /update 페이지를 앱 안에서 엽니다.</span></div>
+                <div><strong>시스템 정보</strong><span>/api/system-info에서 펌웨어 버전, 모델 UUID, MAC 주소, 빌드 정보를 가져옵니다.</span></div>
             </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>🔧 연결 후 설정</h2>
-            
-            <div class="step-container">
-                <div class="step-item">
-                    <h3>7. 슬라이딩 도어 테스트</h3>
-                    <p>연결된 슬라이딩 도어가 정상적으로 작동하는지 테스트합니다:</p>
-                    <ul>
-                        <li>슬라이딩 도어 카드에서 "열기" 버튼 탭</li>
-                        <li>슬라이딩 도어가 실제로 열리는지 확인</li>
-                        <li>"닫기" 버튼으로 슬라이딩 도어 닫기 테스트</li>
-                        <li>상태 표시가 정확한지 확인</li>
-                    </ul>
-                </div>
-                
-                <div class="step-item">
-                    <h3>8. 추가 설정 (선택사항)</h3>
-                    <p>슬라이딩 도어 사용을 위한 추가 설정을 구성합니다:</p>
-                    <ul>
-                        <li>슬라이딩 도어별 개별 설정</li>
-                        <li>알림 설정</li>
-                        <li>도어 캘리브레이션 설정</li>
-                        <li>동작 속도 및 열림 시간 설정</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>🚨 문제 해결</h2>
-            
-            <div class="step-container">
-                <div class="step-item">
-                    <h3>연결 문제 해결</h3>
-                    <p>연결 중 문제가 발생한 경우 다음을 시도해보세요:</p>
-                    <ul>
-                        <li>슬라이딩 도어와의 거리 확인 (5m 이내)</li>
-                        <li>슬라이딩 도어 전원 상태 확인</li>
-                        <li>다른 기기에 연결되어 있는지 확인</li>
-                        <li>다른 블루투스 기기 연결 해제</li>
-                        <li>앱 재시작</li>
-                        <li>기기 재부팅</li>
-                    </ul>
-                    
-                    <div class="warning-box">
-                        <strong>⚠️ 문제 지속 시:</strong> <a href="troubleshooting.html">문제 해결 가이드</a>를 참고하거나 <a href="contact.html">문의하기</a>를 이용해주세요.
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="guide-section">
-            <h2>📚 추가 정보</h2>
-            
-            <div class="step-container">
-                <div class="step-item">
-                    <h3>지원되는 슬라이딩 도어</h3>
-                    <p>SmartDoors는 다음 블루투스 LE 슬라이딩 도어와 호환됩니다:</p>
-                    <ul>
-                        <li>블루투스 LE 기능을 지원하는 슬라이딩 도어</li>
-                        <li>자동 개폐 기능이 있는 슬라이딩 도어</li>
-                        <li>전원 연결 방식의 슬라이딩 도어</li>
-                        <li>끼임 감지 기능이 있는 슬라이딩 도어</li>
-                    </ul>
-                    
-                    <div class="tip-box">
-                        <strong>💡 참고:</strong> 특정 슬라이딩 도어 모델의 호환성은 제조사에 문의하거나 앱 내 호환성 목록을 확인하세요.
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+        </section>
+
+        <section class="section">
+            <h2>연결 후 확인</h2>
+            <ol class="steps">
+                <li>도어 카드에서 연결 상태가 연결됨으로 표시되는지 확인합니다.</li>
+                <li>열기/닫기 제어가 실제 도어 움직임과 일치하는지 확인합니다.</li>
+                <li>설정 화면에서 펌웨어 버전과 모델 UUID가 표시되는지 확인합니다.</li>
+                <li>캘리브레이션이 필요한 신규 설치 현장은 설치 마법사를 실행합니다.</li>
+            </ol>
+        </section>
+
         <div class="footer">
-            <p>연결에 문제가 있으시면 <a href="troubleshooting.html">문제 해결 가이드</a>를 참고하세요.</p>
-            <p><a href="index.html">← 지원 홈으로 돌아가기</a></p>
+            <p>연결 실패가 반복되면 <a href="troubleshooting.html">문제 해결 가이드</a>를 확인하세요.</p>
+            <p><a href="index.html">지원 홈으로 돌아가기</a></p>
         </div>
-    </div>
+    </main>
 </body>
-</html> 
+</html>

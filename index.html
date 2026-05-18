@@ -1,502 +1,1821 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartDoors - 스마트 슬라이딩 도어 제어 앱</title>
-    <meta name="description" content="SmartDoors는 블루투스 LE를 통해 스마트 슬라이딩 도어를 쉽고 안전하게 제어할 수 있는 iOS 및 Android 앱입니다.">
-    <meta name="keywords" content="스마트슬라이딩도어,슬라이딩도어,블루투스,스마트홈,자동화,제어,원격">
+    <title>SmartDoors - YG-ADB100 스마트 자동 슬라이딩 도어</title>
+    <meta name="description"
+        content="SmartDoors는 YG-ADB100 스마트 자동 슬라이딩 도어 시스템과 모바일 앱을 소개하고, iOS 및 Android 앱 다운로드와 고객 지원을 제공합니다.">
+    <meta name="keywords" content="YG-ADB100,스마트슬라이딩도어,자동문,슬라이딩도어,리니어모터,블루투스,스마트홈,자동화,제어,원격">
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap");
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+
+        :root {
+            --gold: #8f806c;
+            --gold-light: #c9bca8;
+            --cream: #f6f5f2;
+            --cream-deep: #eeece7;
+            --surface: #fbfaf8;
+            --dark: #2f3234;
+            --gray: #676b6d;
+            --line: rgba(83, 86, 86, 0.14);
+            --font-sans: "Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-serif: "Noto Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-display: "Cairo", "Noto Sans", "Noto Sans KR", sans-serif;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-size: 15.5px;
+            line-height: 1.72;
+            color: var(--dark);
+            background-color: var(--cream);
+            font-weight: 400;
+            letter-spacing: 0;
+            word-break: keep-all;
+            text-rendering: optimizeLegibility;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        p,
+        li {
+            font-size: 0.95rem;
+            line-height: 1.74;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        /* Header */
+
+        .serif {
+            font-family: var(--font-display);
+        }
+
         .header {
-            background: linear-gradient(135deg, #007AFF, #5856D6);
-            color: white;
-            padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(246, 245, 242, 0.96);
+            border-bottom: 1px solid var(--line);
+            box-shadow: 0 2px 18px rgba(51, 51, 51, 0.08);
+            backdrop-filter: blur(16px);
         }
-        
+
         .nav {
+            min-height: 72px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 24px;
         }
-        
+
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 1.38rem;
+            color: var(--dark);
+            text-decoration: none;
+            letter-spacing: 0;
         }
-        
+
         .nav-links {
             display: flex;
-            gap: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-end;
+            font-size: 0.88rem;
+            font-weight: 600;
         }
-        
+
         .nav-links a {
-            color: white;
+            color: var(--dark);
             text-decoration: none;
-            transition: opacity 0.2s;
+            transition: color 0.2s ease;
         }
-        
+
         .nav-links a:hover {
-            opacity: 0.8;
+            color: var(--gold);
         }
-        
-        /* Hero Section */
+
+        .brand-credit {
+            color: var(--gray);
+            text-decoration: none;
+        }
+
+        .brand-credit:hover {
+            color: var(--gold);
+        }
+
         .hero {
-            background: linear-gradient(135deg, #007AFF, #5856D6);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
+            background: linear-gradient(135deg, #f7f6f3 0%, #efede8 100%);
+            padding: 72px 0 56px;
+            border-bottom: 1px solid var(--line);
         }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
+
+        .hero .container {
+            max-width: 1280px;
+            padding-right: 20px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(430px, 0.96fr) minmax(520px, 1.04fr);
+            gap: 54px;
+            align-items: center;
+        }
+
+        .hero-copy {
+            border-top: 2px solid rgba(143, 128, 108, 0.42);
+            padding-top: 26px;
+            max-width: 620px;
+        }
+
+        .kicker {
+            color: var(--gray);
+            font-family: var(--font-display);
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 48px;
+        }
+
+        .partner-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: nowrap;
+            width: fit-content;
+            max-width: 100%;
+            margin-top: 20px;
+            padding: 9px 13px;
+            border: 1px solid rgba(83, 86, 86, 0.16);
+            border-radius: 999px;
+            color: var(--gray);
+            background: rgba(255, 255, 255, 0.68);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .partner-note span,
+        .partner-note strong {
+            white-space: nowrap;
+        }
+
+        .partner-note strong {
+            color: var(--dark);
             font-weight: 700;
         }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+
+        .partner-note:hover {
+            color: var(--gold);
+            border-color: rgba(143, 128, 108, 0.36);
+            background: white;
         }
-        
+
+        .product-code {
+            color: var(--gold);
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.25rem, 4.4vw, 4.15rem);
+            line-height: 1.14;
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            margin-bottom: 28px;
+        }
+
+        .hero-lead {
+            color: #555a5c;
+            border-left: 2px solid rgba(143, 128, 108, 0.3);
+            padding-left: 18px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            line-height: 1.68;
+            font-weight: 600;
+        }
+
+        .hero-copy p {
+            max-width: 560px;
+            color: var(--gray);
+            font-size: 0.96rem;
+        }
+
         .cta-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            gap: 14px;
             flex-wrap: wrap;
+            margin-top: 34px;
         }
-        
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            background: white;
-            color: #007AFF;
-            text-decoration: none;
+
+        .cta-btn,
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 11px 20px;
             border-radius: 8px;
-            font-weight: bold;
-            transition: transform 0.2s;
+            background: var(--gold);
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1px solid var(--gold);
+            box-shadow: 0 12px 28px rgba(83, 86, 86, 0.14);
+            transition: transform 0.2s ease, background 0.2s ease;
         }
-        
-        .cta-btn:hover {
+
+        .cta-btn:hover,
+        .support-btn:hover {
             transform: translateY(-2px);
+            background: #766a5a;
         }
-        
+
+        .cta-btn.store,
         .cta-btn.secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 80px 0;
             background: white;
+            color: var(--dark);
+            border-color: rgba(83, 86, 86, 0.18);
+            box-shadow: 0 10px 24px rgba(51, 51, 51, 0.06);
         }
-        
+
+        .hero-image {
+            height: clamp(460px, 43vw, 600px);
+            min-height: 0;
+            border-radius: 28px 0 0 28px;
+            overflow: hidden;
+            box-shadow: 0 26px 70px rgba(51, 51, 51, 0.16);
+            background: var(--surface);
+        }
+
+        .hero-image img,
+        .feature-image img,
+        .app-card img,
+        .cert-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .hero-image img {
+            object-position: center center;
+        }
+
+        .download-panel {
+            margin-top: 24px;
+            max-width: 620px;
+            padding: 16px 18px;
+            background: white;
+            border: 1px solid rgba(83, 86, 86, 0.14);
+            border-radius: 12px;
+            color: var(--gray);
+            box-shadow: 0 18px 50px rgba(51, 51, 51, 0.06);
+        }
+
+        .download-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 7px;
+            color: var(--dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .download-note {
+            font-size: 0.86rem;
+        }
+
+        .section {
+            padding: 88px 0;
+            background: var(--surface);
+        }
+
+        .section.alt {
+            background: #efede8;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: #74706a;
+            font-family: var(--font-display);
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border-top: 2px solid rgba(143, 128, 108, 0.38);
+            padding-top: 12px;
+            margin-bottom: 18px;
+        }
+
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: #333;
+            font-family: var(--font-serif);
+            color: var(--dark);
+            font-size: clamp(1.9rem, 3.3vw, 3rem);
+            line-height: 1.22;
+            font-weight: 500;
+            letter-spacing: -0.04em;
         }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+
+        .section-desc {
+            color: var(--gray);
+            max-width: 440px;
+            font-size: 0.95rem;
+            line-height: 1.72;
+            font-weight: 400;
         }
-        
-        .feature-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: transform 0.2s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #007AFF;
-        }
-        
-        .feature-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        /* How it works */
-        .how-it-works {
-            padding: 80px 0;
-            background: #f8f9fa;
-        }
-        
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .step {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: #007AFF;
-            color: white;
-            border-radius: 50%;
+
+        .center-title {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 20px;
+            gap: 28px;
+            color: var(--dark);
+            font-family: var(--font-display);
+            font-size: 1.28rem;
+            letter-spacing: 0.12em;
+            font-weight: 500;
+            margin-bottom: 48px;
+            text-align: center;
         }
-        
-        .step h3 {
-            margin-bottom: 15px;
-            color: #333;
+
+        .center-title::before,
+        .center-title::after {
+            content: "";
+            height: 1px;
+            flex: 1;
+            background: rgba(83, 86, 86, 0.16);
         }
-        
-        .step p {
-            color: #666;
+
+        .strengths {
+            position: relative;
+            padding: 82px 0;
+            background: #f1f0ec;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
         }
-        
-        /* Support Section */
-        .support {
-            padding: 80px 0;
+
+        .strengths::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.65;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.48), transparent 46%);
+            pointer-events: none;
+        }
+
+        .strength-grid,
+        .metric-grid,
+        .spec-grid,
+        .business-grid,
+        .application-grid,
+        .support-grid,
+        .cert-grid,
+        .patent-grid {
+            display: grid;
+            gap: 22px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .strength-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 42px;
+        }
+
+        .metric-grid,
+        .support-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .strength-card,
+        .metric-card,
+        .spec-card,
+        .support-card,
+        .cert-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(83, 86, 86, 0.12);
+            border-radius: 14px;
+            padding: 26px 20px;
+            text-align: center;
+            box-shadow: 0 14px 36px rgba(51, 51, 51, 0.04);
+        }
+
+        .strengths .strength-card {
+            min-height: 198px;
+            padding: 24px 18px;
+            text-align: left;
+            background: rgba(251, 250, 248, 0.92);
+        }
+
+        .strength-icon,
+        .mini-icon {
+            width: 66px;
+            height: 66px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            border: 1px solid rgba(83, 86, 86, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5a5f61;
+            font-size: 1.35rem;
+            background: #f7f6f3;
+            font-weight: 600;
+        }
+
+        .strengths .strength-icon {
+            width: 54px;
+            height: 54px;
+            margin: 0 0 18px;
+            border-radius: 14px;
+            color: #4d5354;
+            background: #ffffff;
+        }
+
+        .strength-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .mini-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .strength-card h3,
+        .metric-card h3,
+        .spec-card h3,
+        .support-card h3 {
+            color: var(--dark);
+            font-size: 0.94rem;
+            line-height: 1.46;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .strengths .strength-card h3 {
+            min-height: 44px;
+            margin-bottom: 10px;
+        }
+
+        .metric-value,
+        .spec-value {
+            display: block;
+            color: #655d53;
+            font-weight: 700;
+            font-size: 1.04rem;
+            margin-top: 4px;
+        }
+
+        .technology-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+            gap: 44px;
+            align-items: start;
+        }
+
+        .feature-image {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 22px 54px rgba(51, 51, 51, 0.12);
+            margin-bottom: 24px;
+        }
+
+        .image-caption {
+            position: absolute;
+            inset: auto 0 0;
+            padding: 32px;
+            color: white;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+        }
+
+        .image-caption h3 {
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .feature-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .feature-mini {
+            background: white;
+            border: 1px solid rgba(83, 86, 86, 0.13);
+            border-radius: 14px;
+            padding: 22px 16px;
+            text-align: center;
+        }
+
+        .feature-mini h3 {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .feature-mini p,
+        .support-card p,
+        .strength-card p,
+        .metric-card p,
+        .spec-card p {
+            color: var(--gray);
+            font-size: 0.86rem;
+            line-height: 1.65;
+        }
+
+        .spec-table {
+            border-top: 1px solid rgba(83, 86, 86, 0.2);
+        }
+
+        .spec-group {
+            margin-top: 18px;
+        }
+
+        .spec-group:first-child {
+            margin-top: 0;
+        }
+
+        .spec-group-title {
+            padding: 9px 14px;
+            background: rgba(246, 245, 242, 0.9);
+            color: #5f6363;
+            border-bottom: 1px solid rgba(83, 86, 86, 0.13);
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .spec-row {
+            display: grid;
+            grid-template-columns: 34% 66%;
+            border-bottom: 1px solid rgba(83, 86, 86, 0.12);
+            font-size: 0.8rem;
+            line-height: 1.55;
+        }
+
+        .spec-row strong {
+            padding: 12px 14px;
+            background: rgba(250, 248, 244, 0.42);
+            color: var(--dark);
+        }
+
+        .spec-row span {
+            padding: 12px 16px;
+            color: var(--gray);
             background: white;
         }
-        
-        .support-grid {
+
+        .structure-note {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-top: 28px;
+            padding: 22px;
+            background: #f3f2ef;
+            border: 1px solid rgba(83, 86, 86, 0.13);
+            border-radius: 14px;
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        .smart-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: minmax(340px, 0.95fr) minmax(0, 1.05fr);
+            gap: 56px;
+            align-items: start;
         }
-        
-        .support-card {
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.2s;
+
+        .phone-stage {
+            position: relative;
+            min-height: 560px;
+            margin-top: 44px;
         }
-        
-        .support-card:hover {
-            transform: translateY(-3px);
+
+        .phone {
+            position: absolute;
+            width: 220px;
+            height: 440px;
+            border: 8px solid #111;
+            border-radius: 32px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 24px 52px rgba(51, 51, 51, 0.18);
         }
-        
-        .support-card h3 {
-            color: #007AFF;
-            margin-bottom: 15px;
+
+        .phone::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 112px;
+            height: 22px;
+            transform: translateX(-50%);
+            background: #111;
+            border-radius: 0 0 18px 18px;
+            z-index: 2;
         }
-        
-        .support-card p {
-            color: #666;
-            margin-bottom: 20px;
+
+        .phone img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        
-        .support-btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #007AFF;
+
+        .phone.one {
+            left: 0;
+            top: 72px;
+            transform: rotate(-12deg) scale(0.78);
+            opacity: 0.42;
+        }
+
+        .phone.two {
+            left: 170px;
+            top: 72px;
+            transform: rotate(12deg) scale(0.78);
+            opacity: 0.42;
+        }
+
+        .phone.three {
+            left: 84px;
+            top: 36px;
+            transform: scale(0.9);
+            opacity: 0.78;
+        }
+
+        .phone.four {
+            left: 160px;
+            top: 92px;
+            transform: scale(1.02);
+            z-index: 5;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 34px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: 52px 1fr;
+            gap: 18px;
+            padding: 24px;
+            border: 1px solid rgba(83, 86, 86, 0.12);
+            border-radius: 20px;
+            background: rgba(246, 245, 242, 0.42);
+        }
+
+        .feature-item h3 {
+            font-size: 0.98rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .feature-item p {
+            color: var(--gray);
+            font-size: 0.86rem;
+            line-height: 1.65;
+        }
+
+        .business-box {
+            padding: 32px;
+            background: var(--dark);
             color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.2s;
+            border-radius: 28px;
+            box-shadow: 0 22px 60px rgba(51, 51, 51, 0.18);
         }
-        
-        .support-btn:hover {
-            background: #0056CC;
+
+        .business-box h3 {
+            font-family: var(--font-display);
+            font-size: 1.12rem;
+            font-weight: 500;
+            margin-bottom: 22px;
         }
-        
-        /* Footer */
+
+        .business-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px 26px;
+        }
+
+        .business-point {
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            margin-top: 2px;
+        }
+
+        .business-point strong {
+            display: block;
+            color: var(--gold-light);
+            font-size: 0.84rem;
+            margin-bottom: 3px;
+        }
+
+        .business-point span {
+            display: block;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.8rem;
+            line-height: 1.55;
+        }
+
+        .application-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .app-card {
+            position: relative;
+            min-height: 420px;
+            border-radius: 24px;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 20px 46px rgba(51, 51, 51, 0.15);
+        }
+
+        .app-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(51, 51, 51, 0.92), rgba(51, 51, 51, 0.18), transparent);
+        }
+
+        .app-card-content {
+            position: absolute;
+            inset: auto 0 0;
+            z-index: 1;
+            padding: 28px;
+        }
+
+        .app-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.22rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .app-card p {
+            color: rgba(255, 255, 255, 0.74);
+            font-size: 0.86rem;
+        }
+
+        .sales-points {
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--line);
+        }
+
+        .sales-points::before {
+            content: "SALES POINTS";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(83, 86, 86, 0.06);
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 13vw, 10rem);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .sales-grid {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px 42px;
+        }
+
+        .sales-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--dark);
+            font-size: 0.98rem;
+            font-weight: 700;
+        }
+
+        .cert-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 64px;
+        }
+
+        .company-box {
+            padding: 34px;
+            background: rgba(246, 245, 242, 0.72);
+            border: 1px solid rgba(83, 86, 86, 0.12);
+            border-radius: 24px;
+            margin-bottom: 48px;
+        }
+
+        .company-box strong {
+            display: block;
+            color: var(--dark);
+            font-size: 1.08rem;
+            line-height: 1.7;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .company-box p {
+            color: var(--gray);
+        }
+
+        .cert-section {
+            margin-bottom: 52px;
+        }
+
+        .cert-section h3 {
+            color: #5f6363;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            border-left: 2px solid rgba(143, 128, 108, 0.38);
+            padding-left: 12px;
+            margin-bottom: 24px;
+        }
+
+        .cert-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .patent-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
+        .cert-card {
+            padding: 0;
+            box-shadow: none;
+            background: transparent;
+            border: 0;
+        }
+
+        .cert-image {
+            aspect-ratio: 3 / 4;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #eee;
+            box-shadow: 0 10px 26px rgba(51, 51, 51, 0.07);
+            margin-bottom: 12px;
+        }
+
+        .cert-card strong {
+            display: block;
+            color: var(--dark);
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+
+        .cert-card span {
+            display: block;
+            color: var(--gray);
+            font-size: 0.68rem;
+            margin-top: 2px;
+        }
+
+        .company-info {
+            padding: 34px 0;
+            background: var(--surface);
+            border-top: 1px solid var(--line);
+        }
+
+        .company-info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .company-info-item {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            color: var(--dark);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .company-info-item span:first-child {
+            color: #74706a;
+            font-size: 1.4rem;
+        }
+
+        .banner {
+            position: relative;
+            padding: 44px 20px;
+            text-align: center;
+            color: white;
+            background: #4b4f50;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("images/black-linen.png");
+            opacity: 0.12;
+        }
+
+        .banner p {
+            position: relative;
+            z-index: 1;
+            font-size: clamp(1rem, 1.8vw, 1.35rem);
+            font-weight: 400;
+            line-height: 1.7;
+        }
+
+        .support {
+            background: white;
+        }
+
+        .support-card {
+            text-align: center;
+        }
+
+        .support-card p {
+            margin-bottom: 18px;
+        }
+
         .footer {
-            background: #333;
+            background: var(--dark);
             color: white;
             padding: 40px 0;
             text-align: center;
         }
-        
+
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 28px;
+            text-align: left;
+            margin-bottom: 28px;
         }
-        
-        .footer-section h3 {
-            margin-bottom: 15px;
-            color: #007AFF;
+
+        .footer h3 {
+            color: var(--gold-light);
+            margin-bottom: 14px;
+            font-size: 0.98rem;
+            font-weight: 600;
         }
-        
-        .footer-section ul {
+
+        .footer ul {
             list-style: none;
         }
-        
-        .footer-section ul li {
+
+        .footer li {
+            color: #ccc;
             margin-bottom: 8px;
+            font-size: 0.88rem;
         }
-        
-        .footer-section ul li a {
+
+        .footer a {
             color: #ccc;
             text-decoration: none;
-            transition: color 0.2s;
         }
-        
-        .footer-section ul li a:hover {
+
+        .footer a:hover {
             color: white;
         }
-        
+
         .footer-bottom {
             border-top: 1px solid #555;
-            padding-top: 20px;
+            padding-top: 18px;
             color: #ccc;
         }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .features-grid,
-            .steps,
-            .support-grid {
+
+        @media (max-width: 1024px) {
+
+            .hero-grid,
+            .technology-grid,
+            .smart-grid,
+            .cert-layout {
                 grid-template-columns: 1fr;
+            }
+
+            .hero .container {
+                padding-right: 20px;
+            }
+
+            .strength-grid,
+            .application-grid,
+            .company-info-grid,
+            .footer-content {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .phone-stage {
+                max-width: 460px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 14px 0;
+            }
+
+            .nav-links {
+                gap: 12px 16px;
+                justify-content: flex-start;
+                font-size: 0.86rem;
+            }
+
+            .hero {
+                padding-top: 44px;
+            }
+
+            .partner-note {
+                gap: 8px;
+                padding: 8px 11px;
+                font-size: 0.64rem;
+                letter-spacing: 0.02em;
+            }
+
+            .hero-image {
+                height: 340px;
+                border-radius: 20px;
+            }
+
+            .section-header {
+                display: block;
+            }
+
+            .center-title {
+                font-size: 1.12rem;
+                letter-spacing: 0.08em;
+            }
+
+            .strength-grid,
+            .metric-grid,
+            .feature-mini-grid,
+            .business-grid,
+            .application-grid,
+            .support-grid,
+            .cert-grid,
+            .patent-grid,
+            .company-info-grid,
+            .footer-content,
+            .sales-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-row {
+                grid-template-columns: 1fr;
+            }
+
+            .smart-grid {
+                gap: 24px;
+            }
+
+            .phone-stage {
+                min-height: 480px;
+                transform: scale(0.82);
+                transform-origin: top center;
+                margin-bottom: -80px;
+            }
+
+            .phone.one {
+                left: -30px;
+            }
+
+            .phone.two {
+                left: 150px;
+            }
+
+            .phone.three {
+                left: 54px;
+            }
+
+            .phone.four {
+                left: 128px;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <div class="logo">SmartDoors</div>
+                <a href="#" class="logo">SmartDoors</a>
                 <div class="nav-links">
-                    <a href="#features">기능</a>
-                    <a href="#how-it-works">사용법</a>
-                    <a href="#support">지원</a>
+                    <a href="#product">제품소개</a>
+                    <a href="#technology">기술/사양</a>
+                    <a href="#smart">Smart & IoT</a>
+                    <a href="#certifications">인증/특허</a>
+                    <a href="#download">앱 다운로드</a>
                     <a href="support/">고객지원</a>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>SmartDoors</h1>
-            <p>스마트 슬라이딩 도어를 쉽고 안전하게 제어하세요</p>
-            <div class="cta-buttons">
-                <a href="https://apps.apple.com/kr/app/smartdoors/id6749668197" class="cta-btn">App Store에서 다운로드</a>
-                <a href="https://play.google.com/store/apps/details?id=com.smartdoors.app" class="cta-btn">Google Play에서 다운로드</a>
-                <a href="#features" class="cta-btn secondary">자세히 보기</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">주요 기능</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🔓</div>
-                    <h3>원터치 슬라이딩 도어 제어</h3>
-                    <p>블루투스 LE를 통해 스마트 슬라이딩 도어를 원터치로 열고 닫을 수 있습니다. 복잡한 설정 없이 간편하게 사용하세요.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>실시간 상태 모니터링</h3>
-                    <p>슬라이딩 도어의 현재 상태, 전원 상태, 연결 상태를 실시간으로 확인할 수 있습니다.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>다중 슬라이딩 도어 관리</h3>
-                    <p>여러 개의 슬라이딩 도어를 한 번에 등록하고, 각각의 도어를 원하는 대로 손쉽게 제어할 수 있습니다.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>사용 패턴 분석</h3>
-                    <p>슬라이딩 도어 사용 패턴을 분석하여 에너지 효율성을 높이고 최적화 방안을 제안합니다.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔔</div>
-                    <h3>스마트 알림</h3>
-                    <p>슬라이딩 도어 상태 변경 시 즉시 알림을 받을 수 있습니다. 언제 어디서나 슬라이딩 도어 상황을 파악하세요.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>도어 캘리브레이션</h3>
-                    <p>설치 마법사를 통해 동작 속도, 열림 시간, 끼임 감지 등을 설정할 수 있습니다. 슬라이딩 도어에 최적화된 설정을 제공합니다.</p>
+    <main>
+        <section id="product" class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-copy">
+                        <div class="product-code">YG-ADB100</div>
+                        <h1>3연동 리니어<br>자동 슬라이딩<br>도어 시스템</h1>
+                        <div class="hero-lead">조용함, 안전성, 스마트 제어를 하나로 구현한<br>프리미엄 실내 자동문 솔루션</div>
+                        <p>윤현플러스는 기구·전장·제어 소프트웨어를 통합 개발하는 자동문 전문 기업으로, 리니어 모터 구동과 스마트 제어 기술을 기반으로 고급 주거 및 상업공간에 최적화된 자동문
+                            솔루션을 개발합니다.</p>
+                        <a class="partner-note" href="http://yegadoor.com/shop/main/index.php" target="_blank"
+                            rel="noopener"><span>showroom & care</span><strong>yegadoor</strong></a>
+                        <div class="cta-buttons">
+                            <a href="#technology" class="cta-btn secondary">기술 사양 보기</a>
+                            <a href="#download" class="cta-btn">앱 다운로드</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="images/hero/yegadoor-sliding-door.jpg" alt="예가도어 프리미엄 실내 슬라이딩 도어 시공 이미지">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- How it works -->
-    <section id="how-it-works" class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">사용 방법</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>앱 설치</h3>
-                    <p>App Store 또는 Google Play에서 SmartDoors 앱을 다운로드하고 설치합니다.</p>
+        <section class="strengths">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">Core Benefits</span>
+                        <h2 class="section-title">핵심 강점</h2>
+                    </div>
+                    <p class="section-desc">정숙한 구동, 자동 학습, 안전 감지, 모바일 제어까지 실내 자동문에 필요한 핵심 기능을 균형 있게 담았습니다.</p>
                 </div>
-                
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>슬라이딩 도어 연결</h3>
-                    <p>블루투스를 통해 스마트 슬라이딩 도어를 앱에 연결합니다.</p>
+                <div class="strength-grid">
+                    <div class="strength-card">
+                        <div class="strength-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 9h3l3-4v14l-3-4H4z"></path>
+                                <path d="M15 9.5c.8.7 1.2 1.5 1.2 2.5s-.4 1.8-1.2 2.5"></path>
+                                <path d="M18 7c1.4 1.3 2.2 3 2.2 5s-.8 3.7-2.2 5"></path>
+                            </svg>
+                        </div>
+                        <h3>리니어 모터<br>저소음 구동</h3>
+                        <p>마찰을 줄인 구동 구조로 실내에서도 조용하게 동작합니다.</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 12h16"></path>
+                                <path d="M8 8l-4 4 4 4"></path>
+                                <path d="M16 8l4 4-4 4"></path>
+                                <path d="M7 5v3"></path>
+                                <path d="M17 5v3"></path>
+                            </svg>
+                        </div>
+                        <h3>자동<br>거리 셋팅</h3>
+                        <p>설치 환경에 맞춰 이동 거리를 자동으로 학습합니다.</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3l7 3v5c0 4.5-2.8 8.1-7 10-4.2-1.9-7-5.5-7-10V6z"></path>
+                                <path d="M15 9l-4.5 4.5L9 12"></path>
+                            </svg>
+                        </div>
+                        <h3>끼임 감지 및<br>안전 복귀</h3>
+                        <p>충돌을 감지하면 즉시 정지·복귀해 사용 안전성을 높입니다.</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <rect x="7" y="2.8" width="10" height="18.4" rx="2.2"></rect>
+                                <path d="M10 18h4"></path>
+                                <path d="M10 6h4"></path>
+                            </svg>
+                        </div>
+                        <h3>모바일<br>앱 연동</h3>
+                        <p>앱에서 개폐, 속도, 모드, 상태 확인을 간편하게 관리합니다.</p>
+                    </div>
+                    <div class="strength-card">
+                        <div class="strength-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M19 4c-7.5.2-12 3.9-12 9.5 0 3.2 2.3 5.5 5.5 5.5 5.6 0 8.1-5.9 6.5-15z"></path>
+                                <path d="M6 20c2.5-5 6.4-8.2 11-10"></path>
+                            </svg>
+                        </div>
+                        <h3>에너지 절감<br>운전</h3>
+                        <p>필요한 힘만 정밀하게 제어해 효율적인 운전을 돕습니다.</p>
+                    </div>
                 </div>
-                
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>즉시 사용</h3>
-                    <p>연결이 완료되면 바로 슬라이딩 도어를 제어할 수 있습니다.</p>
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h3>저소음</h3>
+                        <span class="metric-value">40~50dB</span>
+                    </div>
+                    <div class="metric-card">
+                        <h3>무선 업데이트</h3>
+                        <span class="metric-value">OTA 펌웨어</span>
+                    </div>
+                    <div class="metric-card">
+                        <h3>검증된 내구성</h3>
+                        <span class="metric-value">50만회 테스트</span>
+                    </div>
+                    <div class="metric-card">
+                        <h3>초슬림 매립</h3>
+                        <span class="metric-value">상부 레일 최소화</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Support Section -->
-    <section id="support" class="support">
-        <div class="container">
-            <h2 class="section-title">고객 지원</h2>
-            <div class="support-grid">
-                <div class="support-card">
-                    <h3>📱 사용 가이드</h3>
-                    <p>SmartDoors 앱의 모든 기능을 단계별로 안내합니다.</p>
-                    <a href="support/user-guide.html" class="support-btn">가이드 보기</a>
+        <section id="technology" class="section alt">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">Technology</span>
+                        <h2 class="section-title">정밀 제어와<br>견고한 설계의 만남</h2>
+                        <p class="section-desc">마찰 없는 리니어 구동 방식과 고강성 상부 레일 구조로 실현한 반영구적 내구성</p>
+                    </div>
+                    <div>
+                        <div class="metric-value serif" style="font-size:2.15rem; font-style:italic;">500,000+</div>
+                        <div style="color:var(--gray); letter-spacing:0.1em; font-size:0.76rem;">CYCLES TESTED</div>
+                    </div>
                 </div>
-                
-                <div class="support-card">
-                    <h3>🔧 문제 해결</h3>
-                    <p>자주 발생하는 문제들과 해결 방법을 확인하세요.</p>
-                    <a href="support/troubleshooting.html" class="support-btn">문제 해결</a>
-                </div>
-                
-                <div class="support-card">
-                    <h3>🔗 연결 가이드</h3>
-                    <p>스마트 슬라이딩 도어와 앱 연결 방법을 자세히 안내합니다.</p>
-                    <a href="support/connection-guide.html" class="support-btn">연결 방법</a>
-                </div>
-                
-                <div class="support-card">
-                    <h3>📞 문의하기</h3>
-                    <p>추가 도움이 필요하시면 언제든 연락해주세요.</p>
-                    <a href="support/contact.html" class="support-btn">문의하기</a>
+
+                <div class="technology-grid">
+                    <div>
+                        <div class="feature-image">
+                            <img src="images/product/door_rail_closeup.png" alt="YG-ADB100 초슬림 리니어 트랙">
+                            <div class="image-caption">
+                                <h3>초슬림 리니어 트랙</h3>
+                                <p>콤팩트한 사이즈로 완벽한 매립 지원</p>
+                            </div>
+                        </div>
+                        <div class="feature-mini-grid">
+                            <div class="feature-mini">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M4 9h3l3-4v14l-3-4H4z"></path>
+                                        <path d="M15 9.5c.8.7 1.2 1.5 1.2 2.5s-.4 1.8-1.2 2.5"></path>
+                                        <path d="M18 7c1.4 1.3 2.2 3 2.2 5s-.8 3.7-2.2 5"></path>
+                                    </svg>
+                                </div>
+                                <h3>저소음</h3>
+                                <p>40~50dB의 부드럽고 조용한 운전</p>
+                            </div>
+                            <div class="feature-mini">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 3l7 3v5c0 4.5-2.8 8.1-7 10-4.2-1.9-7-5.5-7-10V6z"></path>
+                                        <path d="M15 9l-4.5 4.5L9 12"></path>
+                                    </svg>
+                                </div>
+                                <h3>안전 복귀</h3>
+                                <p>끼임·충돌 시 자동 감지 후 역방향 복귀</p>
+                            </div>
+                            <div class="feature-mini">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M8 4h8v16H8z"></path>
+                                        <path d="M16 12h4"></path>
+                                        <path d="M20 12l-3-3"></path>
+                                        <path d="M20 12l-3 3"></path>
+                                    </svg>
+                                </div>
+                                <h3>비상 개방</h3>
+                                <p>정전·화재 시 직접 힘으로 수동 개방 가능</p>
+                            </div>
+                            <div class="feature-mini">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M4 7h16"></path>
+                                        <path d="M6 7v10"></path>
+                                        <path d="M18 7v10"></path>
+                                        <path d="M9 17h6"></path>
+                                        <path d="M12 10v4"></path>
+                                    </svg>
+                                </div>
+                                <h3>초 슬림</h3>
+                                <p>초슬림 상부 구동부로 인테리어 완성도 향상</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="center-title" style="font-size:1.15rem; margin-bottom:24px;">주요 사양</h3>
+                        <div class="spec-table">
+                            <div class="spec-group">
+                                <div class="spec-group-title">구동 및 시스템</div>
+                                <div class="spec-row"><strong>시스템 전원</strong><span>220V 60Hz 1.9A (SMPS 방식)</span></div>
+                                <div class="spec-row"><strong>레일방식</strong><span>상부 중앙 무버 구동형</span></div>
+                                <div class="spec-row"><strong>구동방식</strong><span>유/무선 터치, 감지 센서, 스마트폰 앱</span></div>
+                                <div class="spec-row"><strong>도어개폐속도</strong><span>0.2 ~ 0.5m/sec</span></div>
+                                <div class="spec-row"><strong>열림시간 설정</strong><span>0 ~ 10 sec 조정가능, 수동 모드 지원</span>
+                                </div>
+                            </div>
+                            <div class="spec-group">
+                                <div class="spec-group-title">기능 및 안전</div>
+                                <div class="spec-row"><strong>스마트·IoT 기능</strong><span>Android, Iphone 지원</span></div>
+                                <div class="spec-row"><strong>편의기능</strong><span>Push & Go, Open Hold</span></div>
+                                <div class="spec-row"><strong>안전기능</strong><span>DOB 기반 충돌 감지, 스톨감지, 과전류 차단</span></div>
+                                <div class="spec-row"><strong>에너지 저감</strong><span>인버터 드라이브, 액티브 크루즈, 에너지 세이빙</span>
+                                </div>
+                                <div class="spec-row"><strong>웹/OTA 지원</strong><span>무선 펌웨어 업데이트, 설정 관리</span></div>
+                            </div>
+                            <div class="spec-group">
+                                <div class="spec-group-title">성능 및 한계</div>
+                                <div class="spec-row"><strong>수동개폐력</strong><span>10N 미만</span></div>
+                                <div class="spec-row"><strong>허용중량</strong><span>20kg (3연동), 80kg (IRD)</span></div>
+                                <div class="spec-row"><strong>최대소모전력</strong><span>20W ~ 160W (하중 적응제어)</span></div>
+                                <div class="spec-row"><strong>사용시 소음</strong><span>40dB ~ 50dB</span></div>
+                                <div class="spec-row"><strong>테스트 인증</strong><span>KC인증, 개폐 50만회 시험인증</span></div>
+                            </div>
+                        </div>
+                        <div class="structure-note">
+                            <span class="mini-icon" style="margin:0; width:42px; height:42px;" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M4 18h16"></path>
+                                    <path d="M6 18V7h12v11"></path>
+                                    <path d="M8 7l2-3h4l2 3"></path>
+                                    <path d="M10 12h4"></path>
+                                </svg>
+                            </span>
+                            <p>자사 표준에 따른 장경간 구조에서 힘·처짐·뒤틀림에 강해 자동 3연동 및 중량 도어에 적합합니다.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <section id="smart" class="section">
+            <div class="container">
+                <div class="smart-grid">
+                    <div>
+                        <span class="section-label">Smart & IoT</span>
+                        <h2 class="section-title">스마트·IoT 기능 및<br>적용 가치</h2>
+                        <p class="section-desc">도어 제어를 넘어, 운영 데이터와 유지보수까지 연결하는 스마트 자동문 솔루션</p>
+                        <div class="phone-stage">
+                            <div class="phone one"><img src="images/app/app_3.jpg" alt="SmartDoors 사용 패턴 화면"></div>
+                            <div class="phone two"><img src="images/app/app_1.jpg" alt="SmartDoors 에너지 모니터링 화면"></div>
+                            <div class="phone three"><img src="images/app/app_2.jpg" alt="SmartDoors 대시보드 화면"></div>
+                            <div class="phone four"><img src="images/app/app_4.jpg" alt="SmartDoors 도어 제어 화면"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M12 4v10"></path>
+                                        <path d="M8 10l4 4 4-4"></path>
+                                        <path d="M5 18h14"></path>
+                                        <path d="M17.5 6.5a5.5 5.5 0 0 0-11 0"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3>OTA 무선 업데이트</h3>
+                                    <p>현장 방문 없이도 스마트폰 앱을 통해 최신 펌웨어를 유지하고 새로운 기능을 즉시 업데이트합니다.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <rect x="7" y="3" width="10" height="18" rx="2.2"></rect>
+                                        <path d="M10 17.5h4"></path>
+                                        <path d="M10 8h4"></path>
+                                        <path d="M10 11h4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3>맞춤형 스마트 앱 제어</h3>
+                                    <p>도어의 개폐 속도, 열림 대기 시간, 센서 감도 등을 실시간으로 설정하고 수동/자동 모드를 간편하게 전환합니다.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M4 19V5"></path>
+                                        <path d="M4 19h16"></path>
+                                        <path d="M8 16v-5"></path>
+                                        <path d="M12 16V8"></path>
+                                        <path d="M16 16v-7"></path>
+                                        <path d="M19 6l-4 4-3-2-4 4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3>지능형 데이터 분석</h3>
+                                    <p>누적 사용 횟수와 동작 패턴을 분석하여 소모품 교체 주기를 미리 알리고 고장을 사전에 방지합니다.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="mini-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M19 4c-7.5.2-12 3.9-12 9.5 0 3.2 2.3 5.5 5.5 5.5 5.6 0 8.1-5.9 6.5-15z"></path>
+                                        <path d="M6 20c2.5-5 6.4-8.2 11-10"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3>에코 에너지 세이빙 & 친환경</h3>
+                                    <p>하중 적응형 가변 제어 기술로 불필요한 대기 전력을 80% 이상 차단하며, 벨트/기어리스 설계로 미세 분진 발생이 없는 친환경 솔루션입니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="business-box">
+                            <h3>차별화된 비즈니스 & 영업 포인트</h3>
+                            <div class="business-grid">
+                                <div class="business-point"><span class="check">✓</span>
+                                    <div><strong>유지보수 혁신</strong><span>벨트·기어 소모품 없는 리니어 엔진으로 장기 유지비 60% 절감</span></div>
+                                </div>
+                                <div class="business-point"><span class="check">✓</span>
+                                    <div><strong>관리 효율성</strong><span>직관적인 앱 설정 및 원격 진단으로 관리자 개입 최소화</span></div>
+                                </div>
+                                <div class="business-point"><span class="check">✓</span>
+                                    <div><strong>확장성</strong><span>기존 수동 중문 및 일반 자동문 프레임에 그대로 적용 가능한 리트로핏 설계</span>
+                                    </div>
+                                </div>
+                                <div class="business-point"><span class="check">✓</span>
+                                    <div><strong>시공성</strong><span>초슬림 트랙(40mmx30mm) 설계로 어떠한 인테리어 환경에도 완벽 매립</span>
+                                    </div>
+                                </div>
+                                <div class="business-point"><span class="check">✓</span>
+                                    <div><strong>마케팅 경쟁력</strong><span>국내 유일 50만 회 내구성 테스트 완료 및 특허 보유 제품</span></div>
+                                </div>
+                                <div class="business-point"><span class="check">✓</span>
+                                    <div><strong>스마트 연동</strong><span>홈 IoT 시스템 및 빌딩 자동화 시스템과의 원활한 API 연동</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section alt">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">Application Areas</span>
+                        <h2 class="section-title">비즈니스의 무한한 확장</h2>
+                    </div>
+                    <p class="section-desc">YG-ADB100의 정밀한 제어 기술과 초슬림 디자인은 주거 환경을 넘어 의료, 상업, 업무 공간 등 모든 프리미엄 인테리어의 기준이
+                        됩니다.</p>
+                </div>
+                <div class="application-grid">
+                    <div class="app-card"><img src="images/app/app_residential.jpg" alt="프리미엄 주거">
+                        <div class="app-card-content">
+                            <h3>프리미엄 주거</h3>
+                            <p>아파트 중문, 팬트리, 드레스룸</p>
+                        </div>
+                    </div>
+                    <div class="app-card"><img src="images/app/app_medical.jpg" alt="의료 시설">
+                        <div class="app-card-content">
+                            <h3>의료 시설</h3>
+                            <p>수술실, 격리실, 진료실 입구</p>
+                        </div>
+                    </div>
+                    <div class="app-card"><img src="images/app/app_commercial.jpg" alt="상업 공간">
+                        <div class="app-card-content">
+                            <h3>상업 공간</h3>
+                            <p>호텔 로비, VIP 라운지, 명품관</p>
+                        </div>
+                    </div>
+                    <div class="app-card"><img src="images/app/app_office.jpg" alt="스마트 오피스">
+                        <div class="app-card-content">
+                            <h3>스마트 오피스</h3>
+                            <p>회의실, 임원실, 연구소 보안실</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section sales-points">
+            <div class="container">
+                <h2 class="center-title">영업 포인트</h2>
+                <div class="sales-grid">
+                    <div class="sales-item"><span class="check">✓</span>초슬림 헤더와 넓은 개방감</div>
+                    <div class="sales-item"><span class="check">✓</span>프레임·유리 패턴 커스터마이징</div>
+                    <div class="sales-item"><span class="check">✓</span>모듈러 구조로 다양한 타입 대응</div>
+                    <div class="sales-item"><span class="check">✓</span>기존 수동 중문 자동화 리트로핏 가능</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <div class="container">
+                <div class="cert-layout">
+                    <div>
+                        <span class="section-label">Heritage</span>
+                        <h2 class="section-title">인증 및<br>특허 현황</h2>
+                        <p class="section-desc">윤현플러스는 검증된 기술력과 독자적인 특허를 바탕으로 최상의 품질과 안전성을 보장합니다.</p>
+                        <p class="serif" style="margin-top:28px; color:var(--dark); font-style:italic;">"Innovation in
+                            every motion."</p>
+                    </div>
+                    <div>
+                        <div class="company-box">
+                            <strong>윤현플러스(주)는 실내 자동문 솔루션을 중심으로<br>기구·전장·제어 소프트웨어를 통합 개발하는 자동문 전문 기업입니다.</strong>
+                            <p>다양한 현장 환경에서도 안정적으로 동작하도록 구동부(리니어 모터/모션 제어), 센서 기반 안전 로직, 전원/컨트롤러까지 한 번에 설계·검증하며, 설치와
+                                유지보수까지 고려한 제품 완성도를 추구합니다.</p>
+                        </div>
+
+                        <div class="cert-section">
+                            <h3>Enterprise Certifications</h3>
+                            <div class="cert-grid">
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/cert_1.png" alt="벤처기업확인서"></div>
+                                    <strong>벤처기업확인서</strong>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/cert_2.jpeg" alt="기업부설연구소"></div>
+                                    <strong>기업부설연구소</strong>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/cert_3.png" alt="품질인증-ISO9001"></div>
+                                    <strong>품질인증-ISO9001</strong>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/cert_4.jpeg" alt="ESG 경영 인증"></div>
+                                    <strong>ESG 경영 인증</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cert-section">
+                            <h3>Product Tests & Safety</h3>
+                            <div class="cert-grid">
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/cert_kc.png" alt="KC 인증서"></div>
+                                    <strong>KC 인증서</strong><span>자동 도어 컨트롤러</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/test_emc.png" alt="전자파적합성 성적서"></div>
+                                    <strong>성적서</strong><span>전자파적합성</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/test_durability.png"
+                                            alt="50만회 내구성 테스트 성적서"></div><strong>성적서</strong><span>50만회 내구성 테스트</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/cert_kc.png" alt="AC/DC 컨버터 인증서">
+                                    </div><strong>인증서</strong><span>AC/DC 컨버터</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cert-section">
+                            <h3>Intellectual Property</h3>
+                            <div class="patent-grid">
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/patent_1.png" alt="다중 도어 장치 특허증">
+                                    </div><strong>특허증</strong><span>102718385</span><span>다중 도어 장치</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/patent_2.png" alt="다단 슬라이딩 도어 특허출원">
+                                    </div><strong>특허출원</strong><span>102023009</span><span>다단 슬라이딩 도어</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/patent_3.png" alt="리니어 모터 구조 특허출원">
+                                    </div><strong>특허출원</strong><span>102026001</span><span>리니어 모터 구조</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/patent_4.png" alt="중앙이동체 중문 특허출원">
+                                    </div><strong>특허출원</strong><span>102026003</span><span>중앙이동체 중문</span>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-image"><img src="images/cert/patent_5.png" alt="자기적응형 충돌감지 특허출원">
+                                    </div><strong>특허출원</strong><span>102026008</span><span>자기적응형 충돌감지</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="download" class="section alt">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">SmartDoors App</span>
+                        <h2 class="section-title">앱 다운로드</h2>
+                    </div>
+                    <p class="section-desc">SmartDoors 앱으로 YG-ADB100의 개폐, 설정, 상태 확인, OTA 업데이트를 더 간편하게 관리할 수 있습니다.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="https://apps.apple.com/kr/app/smartdoors/id6749668197" class="cta-btn store">App Store에서
+                        다운로드</a>
+                    <a href="downloads/android/smartdoors.apk" class="cta-btn" download>Android APK 다운로드</a>
+                </div>
+                <div class="download-panel" aria-live="polite">
+                    <div class="download-meta">
+                        <span id="android-version">최신 Android APK</span>
+                        <span id="android-updated">직접 설치용</span>
+                        <span id="android-size"></span>
+                    </div>
+                    <p class="download-note">Android에서 알 수 없는 앱 설치 허용이 필요할 수 있습니다. 기존 앱 위에 업데이트 설치할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="support" class="section support">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">Support</span>
+                        <h2 class="section-title">고객 지원</h2>
+                    </div>
+                </div>
+                <div class="support-grid">
+                    <div class="support-card">
+                        <h3>사용 가이드</h3>
+                        <p>SmartDoors 앱의 모든 기능을 단계별로 안내합니다.</p>
+                        <a href="support/user-guide.html" class="support-btn">가이드 보기</a>
+                    </div>
+                    <div class="support-card">
+                        <h3>문제 해결</h3>
+                        <p>자주 발생하는 문제들과 해결 방법을 확인하세요.</p>
+                        <a href="support/troubleshooting.html" class="support-btn">문제 해결</a>
+                    </div>
+                    <div class="support-card">
+                        <h3>연결 가이드</h3>
+                        <p>스마트 슬라이딩 도어와 앱 연결 방법을 자세히 안내합니다.</p>
+                        <a href="support/connection-guide.html" class="support-btn">연결 방법</a>
+                    </div>
+                    <div class="support-card">
+                        <h3>문의하기</h3>
+                        <p>추가 도움이 필요하시면 언제든 연락해주세요.</p>
+                        <a href="support/contact.html" class="support-btn">문의하기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="company-info">
+            <div class="container">
+                <div class="company-info-grid">
+                    <div class="company-info-item"><span>B</span>
+                        <div><strong>윤현플러스(주)</strong><br><small>YUNHUNPLUS CO., LTD.</small></div>
+                    </div>
+                    <div class="company-info-item"><span>P</span>
+                        <div>경기도 화성시 배양길 27</div>
+                    </div>
+                    <div class="company-info-item"><span>T</span>
+                        <div>031-293-2143</div>
+                    </div>
+                    <div class="company-info-item"><span>W</span>
+                        <div>yunhunplus.co.kr</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="banner">
+            <p>프리미엄 공간에 어울리는 정숙하고 스마트한 자동문, <strong>YG-ADB100이 새로운 기준을 제안합니다.</strong></p>
+        </section>
+    </main>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
+                <div>
                     <h3>SmartDoors</h3>
                     <p>스마트 슬라이딩 도어 제어의 새로운 경험을 제공합니다.</p>
                 </div>
-                
-                <div class="footer-section">
+                <div>
+                    <h3>제품</h3>
+                    <ul>
+                        <li><a href="#product">YG-ADB100 제품소개</a></li>
+                        <li><a href="#technology">기술/사양</a></li>
+                        <li><a href="#smart">Smart & IoT</a></li>
+                        <li><a href="#certifications">인증/특허</a></li>
+                    </ul>
+                </div>
+                <div>
                     <h3>지원</h3>
                     <ul>
                         <li><a href="support/">고객지원</a></li>
                         <li><a href="support/user-guide.html">사용 가이드</a></li>
                         <li><a href="support/troubleshooting.html">문제 해결</a></li>
+                        <li><a href="downloads/android/smartdoors.apk">Android 다운로드</a></li>
                         <li><a href="support/contact.html">문의하기</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-section">
+                <div>
                     <h3>법적 정보</h3>
                     <ul>
                         <li><a href="support/terms.html">이용약관</a></li>
                         <li><a href="smartdoors-privacy/privacy_policy.html">개인정보처리방침</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>연락처</h3>
-                    <ul>
                         <li>이메일: support@yunhunplus.co.kr</li>
                         <li>웹사이트: https://smartdoors.github.io</li>
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2025 SmartDoors. 모든 권리 보유.</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        (function () {
+            var versionEl = document.getElementById("android-version");
+            var updatedEl = document.getElementById("android-updated");
+            var sizeEl = document.getElementById("android-size");
+
+            fetch("downloads/android/latest.json", { cache: "no-store" })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("metadata unavailable");
+                    }
+                    return response.json();
+                })
+                .then(function (release) {
+                    versionEl.textContent = "Android v" + release.versionName + " (build " + release.versionCode + ")";
+                    if (release.updatedAt) {
+                        updatedEl.textContent = "업데이트 " + new Date(release.updatedAt).toLocaleDateString("ko-KR");
+                    }
+                    if (release.sizeLabel) {
+                        sizeEl.textContent = release.sizeLabel;
+                    }
+                })
+                .catch(function () {
+                    versionEl.textContent = "최신 Android APK";
+                    updatedEl.textContent = "직접 설치용";
+                    sizeEl.textContent = "";
+                });
+        })();
+    </script>
 </body>
+
 </html>
