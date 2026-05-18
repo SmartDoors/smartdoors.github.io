@@ -184,7 +184,6 @@
         .hero {
             background: linear-gradient(135deg, #f7f6f3 0%, #efede8 100%);
             padding: 72px 0 56px;
-            border-bottom: 1px solid var(--line);
         }
 
         .hero .container {
@@ -380,7 +379,7 @@
         }
 
         .section.alt {
-            background: #efede8;
+            background: linear-gradient(180deg, #f4f3ef 0%, #eeece7 100%);
         }
 
         .section-header {
@@ -392,16 +391,24 @@
         }
 
         .section-label {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             color: #74706a;
             font-family: var(--font-display);
             font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border-top: 2px solid rgba(143, 128, 108, 0.38);
-            padding-top: 12px;
             margin-bottom: 18px;
+        }
+
+        .section-label::before {
+            content: "";
+            width: 28px;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(143, 128, 108, 0.38);
         }
 
         .section-title {
@@ -446,9 +453,7 @@
         .strengths {
             position: relative;
             padding: 82px 0;
-            background: #f1f0ec;
-            border-top: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
+            background: linear-gradient(180deg, #f1f0ec 0%, #f7f6f3 100%);
             overflow: hidden;
         }
 
@@ -886,7 +891,6 @@
         .sales-points {
             position: relative;
             overflow: hidden;
-            border-top: 1px solid var(--line);
         }
 
         .sales-points::before {
@@ -1005,7 +1009,6 @@
         .company-info {
             padding: 34px 0;
             background: var(--surface);
-            border-top: 1px solid var(--line);
         }
 
         .company-info-grid {
@@ -1030,6 +1033,7 @@
 
         .banner {
             position: relative;
+            margin-top: -1px;
             padding: 44px 20px;
             text-align: center;
             color: white;
