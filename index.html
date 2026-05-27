@@ -499,7 +499,10 @@
             margin-bottom: 42px;
         }
 
-        .metric-grid,
+        .metric-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+
         .support-grid {
             grid-template-columns: repeat(4, minmax(0, 1fr));
         }
@@ -1143,6 +1146,7 @@
             }
 
             .strength-grid,
+            .metric-grid,
             .application-grid,
             .company-info-grid,
             .footer-content {
@@ -1711,6 +1715,10 @@
                     <div class="metric-card">
                         <h3>초슬림 매립</h3>
                         <span class="metric-value">상부 레일 최소화</span>
+                    </div>
+                    <div class="metric-card">
+                        <h3>국내 설계/제조</h3>
+                        <span class="metric-value">100% 자체 생산</span>
                     </div>
                 </div>
             </div>
