@@ -475,7 +475,7 @@
             position: absolute;
             inset: 0;
             opacity: 0.65;
-            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.48), transparent 46%);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(255, 255, 255, 0) 46%);
             pointer-events: none;
         }
 
@@ -618,7 +618,7 @@
             inset: auto 0 0;
             padding: 32px;
             color: white;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
         }
 
         .image-caption h3 {
@@ -882,7 +882,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(51, 51, 51, 0.92), rgba(51, 51, 51, 0.18), transparent);
+            background: linear-gradient(to top, rgba(51, 51, 51, 0.92), rgba(51, 51, 51, 0.18), rgba(51, 51, 51, 0));
         }
 
         .app-card-content {
@@ -1585,6 +1585,9 @@
                 height: 22px;
             }
         }
+        .print-footer {
+            display: none;
+        }
         @media print {
             @page {
                 size: A4 portrait;
@@ -1597,19 +1600,40 @@
             html, body {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
-                background-color: #ffffff;
+                background-color: #f6f5f2 !important;
             }
             body {
                 width: 1200px;
                 zoom: 0.66;
                 margin: 0 auto;
             }
-            .header, #download, #support, .partner-note {
+            .header, #download, #support, .partner-note, .company-info, .footer {
                 display: none !important;
             }
             section, .section, .strengths, .cert-section {
                 page-break-inside: avoid;
                 break-inside: avoid;
+            }
+            .print-footer {
+                display: flex !important;
+                position: fixed;
+                bottom: 15px;
+                left: 0;
+                right: 0;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                font-size: 12px;
+                color: #676b6d;
+                border-top: 1px solid rgba(83, 86, 86, 0.2);
+                padding-top: 10px;
+                background: #f6f5f2 !important;
+                z-index: 9999;
+                width: 1200px;
+                margin: 0 auto;
+            }
+            .print-footer span {
+                display: inline-block;
             }
         }
     </style>
@@ -2245,6 +2269,14 @@
             </div>
         </div>
     </footer>
+
+    <div class="print-footer">
+        <span>윤헌플러스(주)</span>
+        <span>주소: 경기도 화성시 배양남길 27</span>
+        <span>전화: 031-293-2143</span>
+        <span>메일: support@yunhunplus.co.kr</span>
+        <span>홈페이지: yunhunplus.co.kr</span>
+    </div>
 
     <script>
         (function () {
