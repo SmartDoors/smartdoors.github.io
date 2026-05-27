@@ -1585,7 +1585,7 @@
                 height: 22px;
             }
         }
-        .print-footer {
+        .print-header, .print-footer {
             display: none;
         }
         @media print {
@@ -1606,13 +1606,84 @@
                 width: 1200px;
                 zoom: 0.66;
                 margin: 0 auto;
+                padding-top: 75px !important;
+                padding-bottom: 75px !important;
             }
-            .header, #download, #support, .partner-note, .company-info, .footer {
+            .header, #download, #support, .partner-note, .company-info, .footer, .banner {
                 display: none !important;
             }
-            section, .section, .strengths, .cert-section {
+            /* 인쇄 시 히어로 영역 텍스트 색상을 검은색으로 강제 지정하여 가독성 극대화 */
+            .hero h1, .hero-lead, .hero-copy p, .hero-grid * {
+                color: #000000 !important;
+            }
+            /* 각 주요 섹션이 개별 1페이지씩 차지하도록 강제 페이지 분할 지정 */
+            .strengths, #technology, #smart, #certifications, .section.alt {
+                page-break-before: always !important;
+                break-before: page !important;
+            }
+            /* 각 섹션별 상하 패딩을 시원하고 널찍하게 적용하여 가독성 향상 */
+            section, .section, .strengths {
                 page-break-inside: avoid;
                 break-inside: avoid;
+                padding: 64px 0 !important;
+            }
+            /* 크롬 PDF border-radius 이미지 마스킹 버그 방지 */
+            .hero-image, .feature-image, .app-card, .cert-image, .cert-card, .app-card img, .hero-image img, .feature-image img {
+                border-radius: 0 !important;
+            }
+            .phone-stage {
+                min-height: 480px !important;
+                transform: scale(0.8) !important;
+                transform-origin: top center !important;
+                margin-top: 30px !important;
+                margin-bottom: -60px !important;
+            }
+            /* Heritage 섹션이 1페이지 내에 깔끔하게 수납되도록 규격 및 마진 콤팩트 조정 */
+            .company-box {
+                margin-bottom: 24px !important;
+                padding: 22px !important;
+            }
+            .cert-section {
+                margin-bottom: 24px !important;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            .cert-image {
+                max-height: 95px !important;
+                aspect-ratio: 3 / 4 !important;
+                margin-bottom: 6px !important;
+                width: auto !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            .cert-card strong {
+                font-size: 11px !important;
+                line-height: 1.3 !important;
+            }
+            .cert-card span {
+                font-size: 9px !important;
+                line-height: 1.3 !important;
+            }
+            .cert-grid, .patent-grid {
+                gap: 10px !important;
+            }
+            .print-header {
+                display: flex !important;
+                position: fixed;
+                top: 15px;
+                left: 0;
+                right: 0;
+                justify-content: center;
+                align-items: center;
+                font-size: 13px;
+                font-weight: 500;
+                color: #676b6d;
+                border-bottom: 1px solid rgba(83, 86, 86, 0.16);
+                padding-bottom: 10px;
+                background: #f6f5f2 !important;
+                z-index: 9999;
+                width: 1200px;
+                margin: 0 auto;
             }
             .print-footer {
                 display: flex !important;
@@ -1625,14 +1696,14 @@
                 gap: 15px;
                 font-size: 12px;
                 color: #676b6d;
-                border-top: 1px solid rgba(83, 86, 86, 0.2);
+                border-top: 1px solid rgba(83, 86, 86, 0.16);
                 padding-top: 10px;
                 background: #f6f5f2 !important;
                 z-index: 9999;
                 width: 1200px;
                 margin: 0 auto;
             }
-            .print-footer span {
+            .print-header span, .print-footer span {
                 display: inline-block;
             }
         }
@@ -2002,6 +2073,8 @@
             </div>
         </section>
 
+
+
         <section class="section alt">
             <div class="container">
                 <div class="section-header">
@@ -2269,6 +2342,10 @@
             </div>
         </div>
     </footer>
+
+    <div class="print-header">
+        <span>프리미엄 공간에 어울리는 정숙하고 스마트한 자동문, YG-ADB100이 새로운 기준을 제안합니다.</span>
+    </div>
 
     <div class="print-footer">
         <span>윤헌플러스(주)</span>
