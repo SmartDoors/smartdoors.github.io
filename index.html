@@ -1673,24 +1673,34 @@
                 margin-top: 30px !important;
                 margin-bottom: -60px !important;
             }
-            /* Heritage 섹션이 1페이지 내에 널찍하게 수납되도록 규격 및 마진 콤팩트 조정 */
+            /* Heritage 섹션이 1페이지 내에 완전 수납되도록 최적화 */
             .company-box {
-                margin-bottom: 24px !important;
-                padding: 22px !important;
+                display: none !important; /* 세로 공간 대폭 확보를 위해 회사 설명 숨김 */
+            }
+            #certifications {
+                padding-top: 80px !important; /* 머리말과 겹치지 않게 조율 */
+                padding-bottom: 20px !important; /* 하단 여백 축소 */
             }
             .cert-section {
-                margin-bottom: 24px !important;
+                margin-bottom: 12px !important; /* 섹션 간 마진 축소 */
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
-            .cert-image {
-                max-height: 180px !important; /* 이미지 크기를 크게 대폭 확대 */
-                aspect-ratio: 3 / 4 !important;
+            .cert-section h3 {
+                font-size: 13px !important;
                 margin-bottom: 8px !important;
+            }
+            .cert-image {
+                max-height: 140px !important; /* 3열 배치 상태에서 1페이지 수납을 위해 140px로 조율 */
+                aspect-ratio: 3 / 4 !important;
+                margin-bottom: 6px !important;
                 width: auto !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
                 border: 1px solid rgba(83, 86, 86, 0.2) !important;
+            }
+            .cert-card {
+                padding: 4px !important;
             }
             .cert-card strong {
                 font-size: 11px !important;
