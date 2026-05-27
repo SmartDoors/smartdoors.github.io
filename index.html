@@ -1132,7 +1132,7 @@
             color: #ccc;
         }
 
-        @media (max-width: 1024px) {
+        @media screen and (max-width: 1024px) {
 
             .hero-grid,
             .technology-grid,
@@ -1160,7 +1160,7 @@
             }
         }
 
-        @media (max-width: 760px) {
+        @media screen and (max-width: 760px) {
             body {
                 font-size: 15px;
             }
@@ -1529,7 +1529,7 @@
             }
         }
 
-        @media (max-width: 420px) {
+        @media screen and (max-width: 420px) {
             .container {
                 padding-left: 16px;
                 padding-right: 16px;
@@ -1586,6 +1586,15 @@
             }
         }
         @media print {
+            @page {
+                margin: 0;
+            }
+            body {
+                margin: 0;
+            }
+            .header, #download, #support, .partner-note {
+                display: none !important;
+            }
             section, .section, .strengths, .cert-section {
                 page-break-inside: avoid;
                 break-inside: avoid;
