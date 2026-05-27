@@ -994,7 +994,7 @@
         .cert-card {
             padding: 0;
             box-shadow: none;
-            background: transparent;
+            background: var(--cream);
             border: 0;
         }
 
@@ -1585,7 +1585,7 @@
                 height: 22px;
             }
         }
-        .print-header, .print-footer {
+        .print-header, .print-header, .print-footer {
             display: none;
         }
         @media print {
@@ -1606,8 +1606,8 @@
                 width: 1200px;
                 zoom: 0.66;
                 margin: 0 auto;
-                padding-top: 75px !important;
-                padding-bottom: 75px !important;
+                padding-top: 110px !important; /* 상단 머리말과의 간격을 시원하게 확장 */
+                padding-bottom: 80px !important;
             }
             .header, #download, #support, .partner-note, .company-info, .footer, .banner {
                 display: none !important;
@@ -1616,20 +1616,55 @@
             .hero h1, .hero-lead, .hero-copy p, .hero-grid * {
                 color: #000000 !important;
             }
-            /* 각 주요 섹션이 개별 1페이지씩 차지하도록 강제 페이지 분할 지정 */
-            .strengths, #technology, #smart, #certifications, .section.alt {
+            /* 1페이지에 hero와 strengths 통합하기 위한 패딩 미세 조정 */
+            .hero {
+                padding: 40px 0 20px 0 !important;
+            }
+            .strengths {
+                padding: 20px 0 40px 0 !important;
+            }
+            /* strengths 뒷배경 그라데이션 제거 */
+            .strengths::before {
+                display: none !important;
+            }
+            /* 각 주요 섹션이 개별 1페이지씩 차지하도록 강제 페이지 분할 지정 (strengths는 1페이지에 통합되므로 제외) */
+            #technology, #smart, #certifications, .section.alt {
                 page-break-before: always !important;
                 break-before: page !important;
             }
-            /* 각 섹션별 상하 패딩을 시원하고 널찍하게 적용하여 가독성 향상 */
-            section, .section, .strengths {
+            /* 전체 섹션 배경 및 여백을 통일하여 분홍색 그라데이션 왜곡 해결 */
+            section, .section, .strengths, .cert-section, .section.alt {
+                background: #f6f5f2 !important;
+                background-color: #f6f5f2 !important;
                 page-break-inside: avoid;
                 break-inside: avoid;
                 padding: 64px 0 !important;
             }
+            /* 2페이지부터 시작하는 섹션 상단 패딩 조율 (대안 A 반영: 80px) */
+            #technology, #smart, #certifications, .section.alt {
+                padding-top: 80px !important;
+                padding-bottom: 64px !important;
+            }
             /* 크롬 PDF border-radius 이미지 마스킹 버그 방지 */
             .hero-image, .feature-image, .app-card, .cert-image, .cert-card, .app-card img, .hero-image img, .feature-image img {
                 border-radius: 0 !important;
+            }
+            /* 캡션 및 카드의 투명 그라데이션을 완전히 투명하게 수정 (사용자 피드백 반영) */
+            .image-caption {
+                background: transparent !important;
+                background-image: none !important;
+                padding: 16px 20px !important;
+            }
+            .app-card::after {
+                display: none !important;
+            }
+            .app-card-content {
+                background: transparent !important;
+                background-image: none !important;
+                padding: 16px 20px !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
             }
             .phone-stage {
                 min-height: 480px !important;
@@ -1638,7 +1673,7 @@
                 margin-top: 30px !important;
                 margin-bottom: -60px !important;
             }
-            /* Heritage 섹션이 1페이지 내에 깔끔하게 수납되도록 규격 및 마진 콤팩트 조정 */
+            /* Heritage 섹션이 1페이지 내에 널찍하게 수납되도록 규격 및 마진 콤팩트 조정 */
             .company-box {
                 margin-bottom: 24px !important;
                 padding: 22px !important;
@@ -1649,12 +1684,13 @@
                 break-inside: avoid;
             }
             .cert-image {
-                max-height: 95px !important;
+                max-height: 180px !important; /* 이미지 크기를 크게 대폭 확대 */
                 aspect-ratio: 3 / 4 !important;
-                margin-bottom: 6px !important;
+                margin-bottom: 8px !important;
                 width: auto !important;
                 margin-left: auto !important;
                 margin-right: auto !important;
+                border: 1px solid rgba(83, 86, 86, 0.2) !important;
             }
             .cert-card strong {
                 font-size: 11px !important;
@@ -1664,23 +1700,26 @@
                 font-size: 9px !important;
                 line-height: 1.3 !important;
             }
+            /* 인증 및 특허를 3열 정도로 배치 (사용자 피드백 반영) */
             .cert-grid, .patent-grid {
-                gap: 10px !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
             }
+            /* 눈에 띄도록 골드 배경색을 적용한 상단 머리말 스타일 */
             .print-header {
                 display: flex !important;
                 position: fixed;
-                top: 15px;
+                top: 20px;
                 left: 0;
                 right: 0;
                 justify-content: center;
                 align-items: center;
-                font-size: 13px;
-                font-weight: 500;
-                color: #676b6d;
-                border-bottom: 1px solid rgba(83, 86, 86, 0.16);
-                padding-bottom: 10px;
-                background: #f6f5f2 !important;
+                font-size: 14px;
+                font-weight: 700;
+                color: #ffffff !important;
+                background: #8f806c !important; /* 골드 배경 */
+                border-bottom: 0 !important;
+                padding: 12px 20px !important;
                 z-index: 9999;
                 width: 1200px;
                 margin: 0 auto;
@@ -1707,7 +1746,7 @@
                 display: inline-block;
             }
         }
-    </style>
+        </style>
 </head>
 
 <body>
@@ -2073,60 +2112,9 @@
             </div>
         </section>
 
+        
 
-
-        <section class="section alt">
-            <div class="container">
-                <div class="section-header">
-                    <div>
-                        <span class="section-label">Application Areas</span>
-                        <h2 class="section-title">비즈니스의 무한한 확장</h2>
-                    </div>
-                    <p class="section-desc">YG-ADB100의 정밀한 제어 기술과 초슬림 디자인은 주거 환경을 넘어 의료, 상업, 업무 공간 등 모든 프리미엄 인테리어의 기준이
-                        됩니다.</p>
-                </div>
-                <div class="application-grid">
-                    <div class="app-card"><img src="images/app/app_residential.jpg" alt="프리미엄 주거">
-                        <div class="app-card-content">
-                            <h3>프리미엄 주거</h3>
-                            <p>아파트 중문, 팬트리, 드레스룸</p>
-                        </div>
-                    </div>
-                    <div class="app-card"><img src="images/app/app_medical.jpg" alt="의료 시설">
-                        <div class="app-card-content">
-                            <h3>의료 시설</h3>
-                            <p>수술실, 격리실, 진료실 입구</p>
-                        </div>
-                    </div>
-                    <div class="app-card"><img src="images/app/app_commercial.jpg" alt="상업 공간">
-                        <div class="app-card-content">
-                            <h3>상업 공간</h3>
-                            <p>호텔 로비, VIP 라운지, 명품관</p>
-                        </div>
-                    </div>
-                    <div class="app-card"><img src="images/app/app_office.jpg" alt="스마트 오피스">
-                        <div class="app-card-content">
-                            <h3>스마트 오피스</h3>
-                            <p>회의실, 임원실, 연구소 보안실</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section sales-points">
-            <div class="container">
-                <h2 class="center-title">영업 포인트</h2>
-                <div class="sales-grid">
-                    <div class="sales-item"><span class="check">✓</span>초슬림 헤더와 넓은 개방감</div>
-                    <div class="sales-item"><span class="check">✓</span>프레임·유리 패턴 커스터마이징</div>
-                    <div class="sales-item"><span class="check">✓</span>모듈러 구조로 다양한 타입 대응</div>
-                    <div class="sales-item"><span class="check">✓</span>기존 수동 중문 자동화 리트로핏 가능</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="certifications" class="section">
+<section id="certifications" class="section">
             <div class="container">
                 <div class="cert-layout">
                     <div>
@@ -2217,6 +2205,59 @@
                 </div>
             </div>
         </section>
+
+<section class="section alt">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">Application Areas</span>
+                        <h2 class="section-title">비즈니스의 무한한 확장</h2>
+                    </div>
+                    <p class="section-desc">YG-ADB100의 정밀한 제어 기술과 초슬림 디자인은 주거 환경을 넘어 의료, 상업, 업무 공간 등 모든 프리미엄 인테리어의 기준이
+                        됩니다.</p>
+                </div>
+                <div class="application-grid">
+                    <div class="app-card"><img src="images/app/app_residential.jpg" alt="프리미엄 주거">
+                        <div class="app-card-content">
+                            <h3>프리미엄 주거</h3>
+                            <p>아파트 중문, 팬트리, 드레스룸</p>
+                        </div>
+                    </div>
+                    <div class="app-card"><img src="images/app/app_medical.jpg" alt="의료 시설">
+                        <div class="app-card-content">
+                            <h3>의료 시설</h3>
+                            <p>수술실, 격리실, 진료실 입구</p>
+                        </div>
+                    </div>
+                    <div class="app-card"><img src="images/app/app_commercial.jpg" alt="상업 공간">
+                        <div class="app-card-content">
+                            <h3>상업 공간</h3>
+                            <p>호텔 로비, VIP 라운지, 명품관</p>
+                        </div>
+                    </div>
+                    <div class="app-card"><img src="images/app/app_office.jpg" alt="스마트 오피스">
+                        <div class="app-card-content">
+                            <h3>스마트 오피스</h3>
+                            <p>회의실, 임원실, 연구소 보안실</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section sales-points">
+            <div class="container">
+                <h2 class="center-title">영업 포인트</h2>
+                <div class="sales-grid">
+                    <div class="sales-item"><span class="check">✓</span>초슬림 헤더와 넓은 개방감</div>
+                    <div class="sales-item"><span class="check">✓</span>프레임·유리 패턴 커스터마이징</div>
+                    <div class="sales-item"><span class="check">✓</span>모듈러 구조로 다양한 타입 대응</div>
+                    <div class="sales-item"><span class="check">✓</span>기존 수동 중문 자동화 리트로핏 가능</div>
+                </div>
+            </div>
+        </section>
+
+        
 
         <section id="download" class="section alt">
             <div class="container">
